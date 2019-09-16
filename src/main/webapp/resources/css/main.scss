@@ -1,0 +1,188 @@
+$borderGray: #e4e4e4;
+$primaryFont: 'Roboto Slab', serif;
+$primaryColor: #08767d;
+$textColor: #484848;
+$hoverButton: #fafafa;
+$fast: 0.15s;
+$shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.1);
+$placeholder: #a9a9a9;
+$errorColor: #b51d1d;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: $primaryFont;
+    color: $textColor;
+}
+
+header  {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid $borderGray;
+    padding: 15px;
+}
+
+#choosePage {
+    min-height: calc(100vh - 75px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    .authentication {
+        h1 {
+            font-size: 17px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .options {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            a {
+                height: 110px;
+                width: 300px;
+                border: 1px solid $borderGray;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                text-decoration: none;
+                font-size: 13px;
+                padding: 20px;
+                transition: $fast;
+                &:first-child { margin-right: 20px; }
+                &:hover {
+                    background-color: $hoverButton;
+                    color: $primaryColor;
+                }
+            }
+        }
+    }
+    .register, .login {
+        display: none;
+        width: 380px;
+        .link {
+            font-size: 12px;
+            margin-bottom: 15px;
+            text-align: center;
+            a {
+                color: $primaryColor;
+                text-decoration: none;
+            }
+        }
+        label {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 10px;
+            cursor: text;
+            input[type="text"], input[type="password"] {
+                width: 100%;
+                border: 1px solid $borderGray;
+                border-radius: 5px;
+                line-height: 46px;
+                outline: none;
+                padding: 0 40px 0 15px;
+                font-size: 13px;
+                max-height: 48px;
+            }
+            .placeholder {
+                position: absolute;
+                left: 15px;
+                font-size: 13px;
+                color: $placeholder;
+                transition: $fast;
+                top: 15px;
+            }
+            .fas, .far {
+                position: absolute;
+                right: 15px;
+                color: $placeholder;
+                transition: $fast;
+                top: 16px;
+            }
+            &.focused {
+                input { padding-top: 12px; }
+                .placeholder {
+                    top: 8px;
+                    font-size: 10px;
+                    color: $primaryColor;
+                }
+                .fas, .far { color: $primaryColor; }
+            }
+            &.error {
+                input { border-color: $errorColor; }
+                .placeholder { color: $errorColor; }
+                .fas, .far { color: $errorColor; }
+                .inline-error {
+                    font-size: 9px;
+                    color: $errorColor;
+                    display: block;
+                    width: 100%;
+                    padding-left: 7px;
+                    margin-top: 4px;
+                }
+            }
+        }
+        button {
+            display: block;
+            line-height: 36px;
+            color: $primaryColor;
+            width: 100%;
+            border: 1px solid $primaryColor;
+            font-size: 13px;
+            border-radius: 5px;
+            transition: $fast;
+            cursor: pointer;
+            outline: none;
+            appearance: none;
+            &:hover {
+                background-color: $primaryColor;
+                color: #fff;
+            }
+        }
+        .or {
+            font-size: 12px;
+            margin: 30px 0 15px;
+            text-align: center;
+            padding-bottom: 10px;
+            color: $placeholder;
+            border-bottom: 1px solid $borderGray;
+        }
+        .social {
+            display: flex;
+            a {
+                width: 50%;
+                line-height: 30px;
+                border: 1px solid;
+                border-radius: 5px;
+                font-size: 12px;
+                text-align: center;
+                text-decoration: none;
+                transition: $fast;
+                .fab {
+                    margin-right: 5px;
+                    transition: $fast;
+                }
+                @each $social, $color in ("facebook" #4267B2, "google" #D93025) {
+                    &##{$social} {
+                        @if $social == 'facebook' {
+                            margin-right: 10px;
+                        }
+                        border-color: $color;
+                        color: $color;
+                        .fab { color: $color; }
+                        &:hover {
+                            background-color: $color;
+                            color: #fff;
+                            .fab { color: #fff; }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

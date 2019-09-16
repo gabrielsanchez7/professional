@@ -1,0 +1,200 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto Slab", serif;
+  color: #484848;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid #e4e4e4;
+  padding: 15px;
+}
+
+#choosePage {
+  min-height: calc(100vh - 75px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+#choosePage .authentication h1 {
+  font-size: 17px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+#choosePage .authentication .options {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#choosePage .authentication .options a {
+  height: 110px;
+  width: 300px;
+  border: 1px solid #e4e4e4;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  font-size: 13px;
+  padding: 20px;
+  transition: 0.15s;
+}
+#choosePage .authentication .options a:first-child {
+  margin-right: 20px;
+}
+#choosePage .authentication .options a:hover {
+  background-color: #fafafa;
+  color: #08767d;
+}
+#choosePage .register, #choosePage .login {
+  display: none;
+  width: 380px;
+}
+#choosePage .register .link, #choosePage .login .link {
+  font-size: 12px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+#choosePage .register .link a, #choosePage .login .link a {
+  color: #08767d;
+  text-decoration: none;
+}
+#choosePage .register label, #choosePage .login label {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+  cursor: text;
+}
+#choosePage .register label input[type=text], #choosePage .register label input[type=password], #choosePage .login label input[type=text], #choosePage .login label input[type=password] {
+  width: 100%;
+  border: 1px solid #e4e4e4;
+  border-radius: 5px;
+  line-height: 46px;
+  outline: none;
+  padding: 0 40px 0 15px;
+  font-size: 13px;
+  max-height: 48px;
+}
+#choosePage .register label .placeholder, #choosePage .login label .placeholder {
+  position: absolute;
+  left: 15px;
+  font-size: 13px;
+  color: #a9a9a9;
+  transition: 0.15s;
+  top: 15px;
+}
+#choosePage .register label .fas, #choosePage .register label .far, #choosePage .login label .fas, #choosePage .login label .far {
+  position: absolute;
+  right: 15px;
+  color: #a9a9a9;
+  transition: 0.15s;
+  top: 16px;
+}
+#choosePage .register label.focused input, #choosePage .login label.focused input {
+  padding-top: 12px;
+}
+#choosePage .register label.focused .placeholder, #choosePage .login label.focused .placeholder {
+  top: 8px;
+  font-size: 10px;
+  color: #08767d;
+}
+#choosePage .register label.focused .fas, #choosePage .register label.focused .far, #choosePage .login label.focused .fas, #choosePage .login label.focused .far {
+  color: #08767d;
+}
+#choosePage .register label.error input, #choosePage .login label.error input {
+  border-color: #b51d1d;
+}
+#choosePage .register label.error .placeholder, #choosePage .login label.error .placeholder {
+  color: #b51d1d;
+}
+#choosePage .register label.error .fas, #choosePage .register label.error .far, #choosePage .login label.error .fas, #choosePage .login label.error .far {
+  color: #b51d1d;
+}
+#choosePage .register label.error .inline-error, #choosePage .login label.error .inline-error {
+  font-size: 9px;
+  color: #b51d1d;
+  display: block;
+  width: 100%;
+  padding-left: 7px;
+  margin-top: 4px;
+}
+#choosePage .register button, #choosePage .login button {
+  display: block;
+  line-height: 36px;
+  color: #08767d;
+  width: 100%;
+  border: 1px solid #08767d;
+  font-size: 13px;
+  border-radius: 5px;
+  transition: 0.15s;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+}
+#choosePage .register button:hover, #choosePage .login button:hover {
+  background-color: #08767d;
+  color: #fff;
+}
+#choosePage .register .or, #choosePage .login .or {
+  font-size: 12px;
+  margin: 30px 0 15px;
+  text-align: center;
+  padding-bottom: 10px;
+  color: #a9a9a9;
+  border-bottom: 1px solid #e4e4e4;
+}
+#choosePage .register .social, #choosePage .login .social {
+  display: flex;
+}
+#choosePage .register .social a, #choosePage .login .social a {
+  width: 50%;
+  line-height: 30px;
+  border: 1px solid;
+  border-radius: 5px;
+  font-size: 12px;
+  text-align: center;
+  text-decoration: none;
+  transition: 0.15s;
+}
+#choosePage .register .social a .fab, #choosePage .login .social a .fab {
+  margin-right: 5px;
+  transition: 0.15s;
+}
+#choosePage .register .social a#facebook, #choosePage .login .social a#facebook {
+  margin-right: 10px;
+  border-color: #4267B2;
+  color: #4267B2;
+}
+#choosePage .register .social a#facebook .fab, #choosePage .login .social a#facebook .fab {
+  color: #4267B2;
+}
+#choosePage .register .social a#facebook:hover, #choosePage .login .social a#facebook:hover {
+  background-color: #4267B2;
+  color: #fff;
+}
+#choosePage .register .social a#facebook:hover .fab, #choosePage .login .social a#facebook:hover .fab {
+  color: #fff;
+}
+#choosePage .register .social a#google, #choosePage .login .social a#google {
+  border-color: #D93025;
+  color: #D93025;
+}
+#choosePage .register .social a#google .fab, #choosePage .login .social a#google .fab {
+  color: #D93025;
+}
+#choosePage .register .social a#google:hover, #choosePage .login .social a#google:hover {
+  background-color: #D93025;
+  color: #fff;
+}
+#choosePage .register .social a#google:hover .fab, #choosePage .login .social a#google:hover .fab {
+  color: #fff;
+}
+
+/*# sourceMappingURL=main.css.map */
