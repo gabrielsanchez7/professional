@@ -2,6 +2,7 @@ $borderGray: #e4e4e4;
 $primaryFont: 'Roboto Slab', serif;
 $primaryColor: #08767d;
 $textColor: #484848;
+$textGray: #a0a0a0;
 $hoverButton: #fafafa;
 $fast: 0.15s;
 $shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.1);
@@ -14,21 +15,196 @@ $errorColor: #b51d1d;
     box-sizing: border-box;
     font-family: $primaryFont;
     color: $textColor;
+    font-size: 14px;
+}
+
+#gSignInWrapper .customGPlusSignIn {
+	border: 1px solid #D93025;
+	border-radius: 5px;
+	line-height: 46px;
+	text-align: center;
+	width: 300px;
+	cursor: pointer;
+	transition: $fast;
+	span {
+		color: #D93025;
+		font-size: 12px;
+		transition: $fast;
+		&.fab { margin-right: 5px; }
+	}
+	&:hover {
+		background-color: #D93025;
+		span { color: #fff; }
+	}
+}
+
+#facebook {
+    display: block;
+    width: 300px;
+    line-height: 46px;
+    border: 1px solid #4267B2;
+    color: #4267B2;
+    border-radius: 5px;
+    font-size: 12px;
+    text-align: center;
+    text-decoration: none;
+    transition: $fast;
+    margin-bottom: 10px;
+    span {
+    	color: #4267B2;
+    	font-size: 12px;
+    	transition: $fast;
+    }
+    .fab {
+        margin-right: 5px;
+        transition: $fast;
+        color: #4267B2;
+    }
+    &:hover {
+        background-color: #4267B2;
+        color: #fff;
+        .fab, span { color: #fff; }
+    }
+}
+
+.group-label {
+	display: flex;
+	align-items: center;
+	label {
+		width: 50%;
+		&:first-child { margin-right: 10px; }
+	}
+}
+
+label {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: text;
+    input[type="text"], input[type="password"] {
+        width: 100%;
+        border: 1px solid $borderGray;
+        border-radius: 5px;
+        line-height: 46px;
+        outline: none;
+        padding: 0 40px 0 15px;
+        font-size: 13px;
+        max-height: 48px;
+    }
+    .placeholder {
+        position: absolute;
+        left: 15px;
+        font-size: 13px;
+        color: $placeholder;
+        transition: $fast;
+        top: 15px;
+    }
+    .fas, .far {
+        position: absolute;
+        right: 15px;
+        color: $placeholder;
+        transition: $fast;
+        top: 16px;
+    }
+    &.focused {
+        input { padding-top: 12px; }
+        .placeholder {
+            top: 8px;
+            font-size: 10px;
+            color: $primaryColor;
+        }
+        .fas, .far { color: $primaryColor; }
+    }
+    &.error {
+        input { border-color: $errorColor; }
+        .placeholder { color: $errorColor; }
+        .fas, .far { color: $errorColor; }
+        .inline-error {
+            font-size: 9px;
+            color: $errorColor;
+            display: block;
+            width: 100%;
+            padding-left: 7px;
+            margin-top: 4px;
+        }
+    }
+}
+
+.btn {
+	display: block;
+	line-height: 46px;
+	border: 1px solid;
+	border-radius: 5px;
+	font-size: 12px;
+	width: 110px;
+	text-align: center;
+	cursor: pointer;
+	outline: none;
+	appearance: none;
+	&.btn-on {
+		border-color: $primaryColor;
+		background-color: $primaryColor;
+		color: #fff;
+	}
+	&.btn-off {
+		border-color: $borderGray;
+		color: $textGray;
+	}
 }
 
 header  {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
     border-bottom: 1px solid $borderGray;
     padding: 15px;
+    .auth {
+    	.initials {
+    		display: block;
+    		line-height: 48px;
+    		width: 50px;
+    		border-radius: 50%;
+    		border: 1px solid $borderGray;
+    		color: $primaryColor;
+    		font-size: 14px;
+    		text-transform: uppercase;
+    		font-weight: 700;
+    		text-align: center;
+    		transition: $fast;
+    		cursor: pointer;
+    		&:hover {
+    			background-color: $primaryColor;
+    			border-color: $primaryColor;
+    			color: #fff;
+    		}
+    	}
+    }
 }
 
 #choosePage {
-    min-height: calc(100vh - 75px);
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    #logo { margin-bottom: 15px; }
+    .back {
+    	position: fixed;
+    	top: 20px;
+    	left: 20px;
+    	color: $primaryColor;
+    	font-size: 12px;
+    	display: none;
+    	align-items: center;
+    	cursor: pointer;
+    	.fas {
+    		font-size: 21px;
+    		color: $primaryColor;
+    		margin-right: 5px;
+    	}
+    }
     .authentication {
         h1 {
             font-size: 17px;
@@ -59,6 +235,29 @@ header  {
                 }
             }
         }
+        .go-login {
+        	display: block;
+        	width: 100%;
+        	border-top: 1px solid $borderGray;
+        	margin: 20px auto 0 auto;
+        	padding-top: 20px;
+        	text-align: center;
+        	font-size: 12px; 		
+        	p { color: $textGray; }
+        	a {
+        		color: $primaryColor;
+        		font-weight: 500;
+        		text-decoration: none;
+        	}
+        }
+    }
+    #logreg {
+    	display: none;
+    	h2 {
+    		font-size: 17px;
+            margin-bottom: 20px;
+            text-align: center;
+    	}
     }
     .register, .login {
         display: none;
@@ -71,62 +270,7 @@ header  {
                 color: $primaryColor;
                 text-decoration: none;
             }
-        }
-        label {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 10px;
-            cursor: text;
-            input[type="text"], input[type="password"] {
-                width: 100%;
-                border: 1px solid $borderGray;
-                border-radius: 5px;
-                line-height: 46px;
-                outline: none;
-                padding: 0 40px 0 15px;
-                font-size: 13px;
-                max-height: 48px;
-            }
-            .placeholder {
-                position: absolute;
-                left: 15px;
-                font-size: 13px;
-                color: $placeholder;
-                transition: $fast;
-                top: 15px;
-            }
-            .fas, .far {
-                position: absolute;
-                right: 15px;
-                color: $placeholder;
-                transition: $fast;
-                top: 16px;
-            }
-            &.focused {
-                input { padding-top: 12px; }
-                .placeholder {
-                    top: 8px;
-                    font-size: 10px;
-                    color: $primaryColor;
-                }
-                .fas, .far { color: $primaryColor; }
-            }
-            &.error {
-                input { border-color: $errorColor; }
-                .placeholder { color: $errorColor; }
-                .fas, .far { color: $errorColor; }
-                .inline-error {
-                    font-size: 9px;
-                    color: $errorColor;
-                    display: block;
-                    width: 100%;
-                    padding-left: 7px;
-                    margin-top: 4px;
-                }
-            }
-        }
+		}
         button {
             display: block;
             line-height: 36px;
@@ -186,3 +330,225 @@ header  {
         }
     }
 }
+
+#config-account-page {
+	max-width: 1180px;
+	width: 100%;
+	margin: auto;
+	padding: 70px 0 200px 0;
+	position: relative;
+	.omit {
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		color: $textGray;
+		text-decoration: none;
+	}
+	h1 {
+		font-size: 24px;
+		font-weight: 700;
+		margin-bottom: 40px;
+	}
+	.content-forms {
+		display: flex;
+		align-items: flex-start;
+		.config-menu {
+			width: 300px;
+			margin-right: 40px;
+			li {
+				list-style: none;
+				display: block;
+				width: 100%;
+				font-size: 12px;
+				line-height: 48px;
+				border-radius: 5px;
+				padding: 0 10px;
+				color: $textGray;
+				cursor: pointer;
+				transition: $fast;
+				&:not(:last-child) { margin-bottom: 5px; }
+				&:hover { background-color: $hoverButton; }
+				.fas {
+					color: $textGray;
+					transition: $fast;
+					margin-right: 5px;
+					width: 24px;
+					text-align: center;
+				}
+				&.active {
+					background-color: $primaryColor;
+					color: #fff;
+					.fas { color: #fff; }
+				}
+			}
+		}
+		.form {
+			width: calc(100% - 300px);
+			border-left: 1px solid $borderGray;
+			padding-left: 40px;
+			min-height: 400px;
+			display: none;
+			h2 {
+				font-size: 17px;
+				margin-bottom: 30px;
+				& + p, & + .sure {
+					margin-top: -25px;
+					margin-bottom: 30px;
+				}
+			}
+			&#personal-info { display: block; }
+			& > div {
+				display: flex;
+				align-items: flex-start;
+				.avatar {
+					width: 35%;
+					margin-right: 25px;
+					position: relative;
+					border: 1px solid $borderGray;
+					border-radius: 5px;
+					overflow: hidden;
+					img {
+						display: block;
+						width: 100%;
+					}
+					.choose-photo {
+						position: absolute;
+						display: flex;
+						justify-content: center;
+						align-items: flex-end;
+						width: 100%;
+						height: 100%;
+						padding-bottom: 20px;
+						background-color: rgba(0, 0, 0, 0.5);
+						cursor: pointer;
+						opacity: 0;
+						transition: $fast;
+						top: 0;
+						&:hover { opacity: 1; }
+						span {
+							color: #fff;
+							font-size: 9px;
+							line-height: 28px;
+							border: 1px solid $borderGray;
+							border-radius: 5px;
+							padding: 0 10px;
+							display: flex;
+							align-items: center;
+							cursor: pointer;
+							transition: $fast;
+							&:hover { background-color: rgba(255, 255, 255, 0.2); }
+							.fas {
+								color: #fff;
+								margin-right: 5px;
+							}
+						}
+					}
+				}
+				.fields {
+					width: 65%;
+				}
+			}
+			.buttons {
+				display: flex;
+				align-items: center;
+				justify-content: flex-end;
+				margin-top: 10px;
+				button:first-child { margin-right: 10px; }
+			}
+			& > div {
+				display: flex;
+				align-items: flex-start;
+				margin-top: 20px;
+				.selected {
+					display: block;
+					width: 100%;
+					max-width: 240px;
+					border: 1px solid $borderGray;
+					padding: 10px;
+					border-radius: 5px;
+					height: 250px;
+					overflow: auto;
+					margin-right: 25px;
+					span {
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
+						width: 100%;
+						line-height: 30px;
+						background: #efeeee;
+						font-size: 12px;
+						padding: 0 10px;
+						border-radius: 5px;
+						&:not(:last-child) { margin-bottom: 7px; }
+						.fas {
+							font-size: 12px;
+							cursor: pointer;
+						}
+					}
+				}
+				.categories {
+					width: calc(100% - 240px);
+					display: flex;
+					flex-wrap: wrap;
+					span {
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
+						width: auto;
+						line-height: 30px;
+						background: #efeeee;
+						font-size: 12px;
+						padding: 0 10px;
+						border-radius: 5px;
+						margin-bottom: 10px;
+						cursor: pointer;
+						&:not(:last-child) { margin-right: 7px; }
+					}
+				}
+			}
+			.no-cards {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				margin-top: 80px;
+				p {
+					color: $textGray;
+					font-weight: 300;
+					margin-bottom: 10px;
+				}
+				button {
+					width: auto;
+					padding: 0 15px;
+					display: flex;
+					align-items: center;
+					.fas {
+						color: $textGray;
+						margin-right: 5px;
+						font-size: 20px;
+					}
+				}
+			}
+			.sure + button {
+				width: auto;
+				padding: 0 15px;
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -4,21 +4,210 @@
   box-sizing: border-box;
   font-family: "Roboto Slab", serif;
   color: #484848;
+  font-size: 14px;
+}
+
+#gSignInWrapper .customGPlusSignIn {
+  border: 1px solid #D93025;
+  border-radius: 5px;
+  line-height: 46px;
+  text-align: center;
+  width: 300px;
+  cursor: pointer;
+  transition: 0.15s;
+}
+#gSignInWrapper .customGPlusSignIn span {
+  color: #D93025;
+  font-size: 12px;
+  transition: 0.15s;
+}
+#gSignInWrapper .customGPlusSignIn span.fab {
+  margin-right: 5px;
+}
+#gSignInWrapper .customGPlusSignIn:hover {
+  background-color: #D93025;
+}
+#gSignInWrapper .customGPlusSignIn:hover span {
+  color: #fff;
+}
+
+#facebook {
+  display: block;
+  width: 300px;
+  line-height: 46px;
+  border: 1px solid #4267B2;
+  color: #4267B2;
+  border-radius: 5px;
+  font-size: 12px;
+  text-align: center;
+  text-decoration: none;
+  transition: 0.15s;
+  margin-bottom: 10px;
+}
+#facebook span {
+  color: #4267B2;
+  font-size: 12px;
+  transition: 0.15s;
+}
+#facebook .fab {
+  margin-right: 5px;
+  transition: 0.15s;
+  color: #4267B2;
+}
+#facebook:hover {
+  background-color: #4267B2;
+  color: #fff;
+}
+#facebook:hover .fab, #facebook:hover span {
+  color: #fff;
+}
+
+.group-label {
+  display: flex;
+  align-items: center;
+}
+.group-label label {
+  width: 50%;
+}
+.group-label label:first-child {
+  margin-right: 10px;
+}
+
+label {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+  cursor: text;
+}
+label input[type=text], label input[type=password] {
+  width: 100%;
+  border: 1px solid #e4e4e4;
+  border-radius: 5px;
+  line-height: 46px;
+  outline: none;
+  padding: 0 40px 0 15px;
+  font-size: 13px;
+  max-height: 48px;
+}
+label .placeholder {
+  position: absolute;
+  left: 15px;
+  font-size: 13px;
+  color: #a9a9a9;
+  transition: 0.15s;
+  top: 15px;
+}
+label .fas, label .far {
+  position: absolute;
+  right: 15px;
+  color: #a9a9a9;
+  transition: 0.15s;
+  top: 16px;
+}
+label.focused input {
+  padding-top: 12px;
+}
+label.focused .placeholder {
+  top: 8px;
+  font-size: 10px;
+  color: #08767d;
+}
+label.focused .fas, label.focused .far {
+  color: #08767d;
+}
+label.error input {
+  border-color: #b51d1d;
+}
+label.error .placeholder {
+  color: #b51d1d;
+}
+label.error .fas, label.error .far {
+  color: #b51d1d;
+}
+label.error .inline-error {
+  font-size: 9px;
+  color: #b51d1d;
+  display: block;
+  width: 100%;
+  padding-left: 7px;
+  margin-top: 4px;
+}
+
+.btn {
+  display: block;
+  line-height: 46px;
+  border: 1px solid;
+  border-radius: 5px;
+  font-size: 12px;
+  width: 110px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+}
+.btn.btn-on {
+  border-color: #08767d;
+  background-color: #08767d;
+  color: #fff;
+}
+.btn.btn-off {
+  border-color: #e4e4e4;
+  color: #a0a0a0;
 }
 
 header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
   border-bottom: 1px solid #e4e4e4;
   padding: 15px;
 }
+header .auth .initials {
+  display: block;
+  line-height: 48px;
+  width: 50px;
+  border-radius: 50%;
+  border: 1px solid #e4e4e4;
+  color: #08767d;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-align: center;
+  transition: 0.15s;
+  cursor: pointer;
+}
+header .auth .initials:hover {
+  background-color: #08767d;
+  border-color: #08767d;
+  color: #fff;
+}
 
 #choosePage {
-  min-height: calc(100vh - 75px);
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+#choosePage #logo {
+  margin-bottom: 15px;
+}
+#choosePage .back {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  color: #08767d;
+  font-size: 12px;
+  display: none;
+  align-items: center;
+  cursor: pointer;
+}
+#choosePage .back .fas {
+  font-size: 21px;
+  color: #08767d;
+  margin-right: 5px;
 }
 #choosePage .authentication h1 {
   font-size: 17px;
@@ -51,6 +240,31 @@ header {
   background-color: #fafafa;
   color: #08767d;
 }
+#choosePage .authentication .go-login {
+  display: block;
+  width: 100%;
+  border-top: 1px solid #e4e4e4;
+  margin: 20px auto 0 auto;
+  padding-top: 20px;
+  text-align: center;
+  font-size: 12px;
+}
+#choosePage .authentication .go-login p {
+  color: #a0a0a0;
+}
+#choosePage .authentication .go-login a {
+  color: #08767d;
+  font-weight: 500;
+  text-decoration: none;
+}
+#choosePage #logreg {
+  display: none;
+}
+#choosePage #logreg h2 {
+  font-size: 17px;
+  margin-bottom: 20px;
+  text-align: center;
+}
 #choosePage .register, #choosePage .login {
   display: none;
   width: 380px;
@@ -63,67 +277,6 @@ header {
 #choosePage .register .link a, #choosePage .login .link a {
   color: #08767d;
   text-decoration: none;
-}
-#choosePage .register label, #choosePage .login label {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 10px;
-  cursor: text;
-}
-#choosePage .register label input[type=text], #choosePage .register label input[type=password], #choosePage .login label input[type=text], #choosePage .login label input[type=password] {
-  width: 100%;
-  border: 1px solid #e4e4e4;
-  border-radius: 5px;
-  line-height: 46px;
-  outline: none;
-  padding: 0 40px 0 15px;
-  font-size: 13px;
-  max-height: 48px;
-}
-#choosePage .register label .placeholder, #choosePage .login label .placeholder {
-  position: absolute;
-  left: 15px;
-  font-size: 13px;
-  color: #a9a9a9;
-  transition: 0.15s;
-  top: 15px;
-}
-#choosePage .register label .fas, #choosePage .register label .far, #choosePage .login label .fas, #choosePage .login label .far {
-  position: absolute;
-  right: 15px;
-  color: #a9a9a9;
-  transition: 0.15s;
-  top: 16px;
-}
-#choosePage .register label.focused input, #choosePage .login label.focused input {
-  padding-top: 12px;
-}
-#choosePage .register label.focused .placeholder, #choosePage .login label.focused .placeholder {
-  top: 8px;
-  font-size: 10px;
-  color: #08767d;
-}
-#choosePage .register label.focused .fas, #choosePage .register label.focused .far, #choosePage .login label.focused .fas, #choosePage .login label.focused .far {
-  color: #08767d;
-}
-#choosePage .register label.error input, #choosePage .login label.error input {
-  border-color: #b51d1d;
-}
-#choosePage .register label.error .placeholder, #choosePage .login label.error .placeholder {
-  color: #b51d1d;
-}
-#choosePage .register label.error .fas, #choosePage .register label.error .far, #choosePage .login label.error .fas, #choosePage .login label.error .far {
-  color: #b51d1d;
-}
-#choosePage .register label.error .inline-error, #choosePage .login label.error .inline-error {
-  font-size: 9px;
-  color: #b51d1d;
-  display: block;
-  width: 100%;
-  padding-left: 7px;
-  margin-top: 4px;
 }
 #choosePage .register button, #choosePage .login button {
   display: block;
@@ -195,6 +348,229 @@ header {
 }
 #choosePage .register .social a#google:hover .fab, #choosePage .login .social a#google:hover .fab {
   color: #fff;
+}
+
+#config-account-page {
+  max-width: 1180px;
+  width: 100%;
+  margin: auto;
+  padding: 70px 0 200px 0;
+  position: relative;
+}
+#config-account-page .omit {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #a0a0a0;
+  text-decoration: none;
+}
+#config-account-page h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+#config-account-page .content-forms {
+  display: flex;
+  align-items: flex-start;
+}
+#config-account-page .content-forms .config-menu {
+  width: 300px;
+  margin-right: 40px;
+}
+#config-account-page .content-forms .config-menu li {
+  list-style: none;
+  display: block;
+  width: 100%;
+  font-size: 12px;
+  line-height: 48px;
+  border-radius: 5px;
+  padding: 0 10px;
+  color: #a0a0a0;
+  cursor: pointer;
+  transition: 0.15s;
+}
+#config-account-page .content-forms .config-menu li:not(:last-child) {
+  margin-bottom: 5px;
+}
+#config-account-page .content-forms .config-menu li:hover {
+  background-color: #fafafa;
+}
+#config-account-page .content-forms .config-menu li .fas {
+  color: #a0a0a0;
+  transition: 0.15s;
+  margin-right: 5px;
+  width: 24px;
+  text-align: center;
+}
+#config-account-page .content-forms .config-menu li.active {
+  background-color: #08767d;
+  color: #fff;
+}
+#config-account-page .content-forms .config-menu li.active .fas {
+  color: #fff;
+}
+#config-account-page .content-forms .form {
+  width: calc(100% - 300px);
+  border-left: 1px solid #e4e4e4;
+  padding-left: 40px;
+  min-height: 400px;
+  display: none;
+}
+#config-account-page .content-forms .form h2 {
+  font-size: 17px;
+  margin-bottom: 30px;
+}
+#config-account-page .content-forms .form h2 + p, #config-account-page .content-forms .form h2 + .sure {
+  margin-top: -25px;
+  margin-bottom: 30px;
+}
+#config-account-page .content-forms .form#personal-info {
+  display: block;
+}
+#config-account-page .content-forms .form > div {
+  display: flex;
+  align-items: flex-start;
+}
+#config-account-page .content-forms .form > div .avatar {
+  width: 35%;
+  margin-right: 25px;
+  position: relative;
+  border: 1px solid #e4e4e4;
+  border-radius: 5px;
+  overflow: hidden;
+}
+#config-account-page .content-forms .form > div .avatar img {
+  display: block;
+  width: 100%;
+}
+#config-account-page .content-forms .form > div .avatar .choose-photo {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  opacity: 0;
+  transition: 0.15s;
+  top: 0;
+}
+#config-account-page .content-forms .form > div .avatar .choose-photo:hover {
+  opacity: 1;
+}
+#config-account-page .content-forms .form > div .avatar .choose-photo span {
+  color: #fff;
+  font-size: 9px;
+  line-height: 28px;
+  border: 1px solid #e4e4e4;
+  border-radius: 5px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.15s;
+}
+#config-account-page .content-forms .form > div .avatar .choose-photo span:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+#config-account-page .content-forms .form > div .avatar .choose-photo span .fas {
+  color: #fff;
+  margin-right: 5px;
+}
+#config-account-page .content-forms .form > div .fields {
+  width: 65%;
+}
+#config-account-page .content-forms .form .buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+#config-account-page .content-forms .form .buttons button:first-child {
+  margin-right: 10px;
+}
+#config-account-page .content-forms .form > div {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 20px;
+}
+#config-account-page .content-forms .form > div .selected {
+  display: block;
+  width: 100%;
+  max-width: 240px;
+  border: 1px solid #e4e4e4;
+  padding: 10px;
+  border-radius: 5px;
+  height: 250px;
+  overflow: auto;
+  margin-right: 25px;
+}
+#config-account-page .content-forms .form > div .selected span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  line-height: 30px;
+  background: #efeeee;
+  font-size: 12px;
+  padding: 0 10px;
+  border-radius: 5px;
+}
+#config-account-page .content-forms .form > div .selected span:not(:last-child) {
+  margin-bottom: 7px;
+}
+#config-account-page .content-forms .form > div .selected span .fas {
+  font-size: 12px;
+  cursor: pointer;
+}
+#config-account-page .content-forms .form > div .categories {
+  width: calc(100% - 240px);
+  display: flex;
+  flex-wrap: wrap;
+}
+#config-account-page .content-forms .form > div .categories span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: auto;
+  line-height: 30px;
+  background: #efeeee;
+  font-size: 12px;
+  padding: 0 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+#config-account-page .content-forms .form > div .categories span:not(:last-child) {
+  margin-right: 7px;
+}
+#config-account-page .content-forms .form .no-cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 80px;
+}
+#config-account-page .content-forms .form .no-cards p {
+  color: #a0a0a0;
+  font-weight: 300;
+  margin-bottom: 10px;
+}
+#config-account-page .content-forms .form .no-cards button {
+  width: auto;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+}
+#config-account-page .content-forms .form .no-cards button .fas {
+  color: #a0a0a0;
+  margin-right: 5px;
+  font-size: 20px;
+}
+#config-account-page .content-forms .form .sure + button {
+  width: auto;
+  padding: 0 15px;
 }
 
 /*# sourceMappingURL=main.css.map */

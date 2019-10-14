@@ -1,0 +1,240 @@
+function Authentication(){
+	this.tipoIngreso = "";
+}
+
+Authentication.prototype.init = function(){
+	this.handler();
+	this.link();
+	this.submitForms();
+	this.googleLogin();
+}
+
+Authentication.prototype.handler = function(){
+	$('header').hide();
+	$('.back').click(function(){
+		$(this).hide();
+		$('#logreg').fadeOut('fast', function(){
+			$('.authentication').fadeIn('fast');
+		});
+	});
+	
+	$('#login').click(function(ev){
+		var t = $(ev.target);
+		t.closest('.authentication').fadeOut('fast', function(){
+			$('#logreg').fadeIn('fast');
+			$('.back').css({display: 'flex'});
+			$('#logreg').find('h2').text('Ingresar');
+			$('#logreg').find('.social span').text('Ingresar');
+			$('#gSignInWrapper').find('.change').text('Ingresar');
+		});
+	});
+	
+	function renderButton() {
+		gapi.signin2.render('my-signin2', {
+			'scope': 'profile email',
+			'width': 240,
+			'height': 50,
+			'longtitle': true,
+			'theme': 'dark',
+			'onsuccess': onSuccess,
+			'onfailure': onFailure
+		});
+	}
+}
+
+Authentication.prototype.link = function(){
+	var auth = this;
+	
+	$('.linkup').click(function(ev){
+		var t = $(ev.target);
+		var data = t.attr('data-link');
+		
+		$('#logreg').find('.social span').text('Registrar');
+		$('#gSignInWrapper').find('.change').text('Registrar');
+
+		switch(data){
+			case "client":
+				auth.tipoIngreso = "client";
+				t.closest('.authentication').fadeOut('fast', function(){
+					$('#logreg').fadeIn('fast');
+					$('.back').css({display: 'flex'});
+				});
+				break;
+			case "proff":
+				auth.tipoIngreso = "proff";
+				t.closest('.authentication').fadeOut('fast', function(){
+					$('#logreg').fadeIn('fast');
+					$('.back').css({display: 'flex'});
+				});
+				break;
+			case "login":
+				t.closest('.register').fadeOut('fast', function(){
+					$('.login').fadeIn('fast');
+				});
+				break;
+			case "register":
+				t.closest('.login').fadeOut('fast', function(){
+					$('.register').fadeIn('fast');
+				});
+				break;
+		}
+	});
+}
+
+Authentication.prototype.googleLogin = function(){
+	var googleUser = {};
+	var startApp = function() {
+		gapi.load('auth2', function() {
+			auth2 = gapi.auth2.init({
+				client_id : '936368267028-pfhrrvmvefckhv2bpb7nj4rl3n83vnkr.apps.googleusercontent.com',
+				cookiepolicy : 'single_host_origin'
+			});
+			attachSignin(document.getElementById('customBtn'));
+		});
+	};
+
+	function attachSignin(element) {
+		auth2.attachClickHandler(element, {}, function(googleUser) {
+			console.log('Logued: ', googleUser);
+			var usuario = {};
+			usuario.idLogin = googleUser.El;
+			usuario.nombre = googleUser.w3.ofa;
+			usuario.apellidos = googleUser.w3.wea;
+			usuario.email = googleUser.w3.U3;
+			usuario.avatar = googleUser.w3.Paa;
+			usuario.tipoLogin = "facebook";
+			$.ajax({
+				url: contextPath + "/usuario/registro",
+				data: JSON.stringify(usuario),
+				contentType: "application/json; charset=utf-8",
+				type: 'POST',
+				dataType: 'json',
+				success: function(data){
+					sessionStorage.setItem('userLogued', JSON.stringify(data.result));
+					location.href = contextPath + "/usuario/config";
+				},
+				error: function(err){
+					console.log('Error en registro: ' + err);
+				}
+			});
+		}, function(error) {
+			alert(JSON.stringify(error, undefined, 2));
+		});
+	}
+
+	startApp();
+}
+
+Authentication.prototype.submitForms = function(){
+	var auth = this;
+	
+	$('.social').click(function(ev){
+		var t = $(ev.target);
+		var social = t.attr('id');
+		var object = {};
+		object.role = auth.tipoIngreso;
+		object.social = social;
+		
+		if(social == 'google') {
+			function onSignIn(googleUser) {
+				var profile = googleUser.getBasicProfile();
+				console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+				console.log('Name: ' + profile.getName());
+				console.log('Image URL: ' + profile.getImageUrl());
+				console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+			}
+		}
+		
+	});
+	
+}
+
+function ConfigUser() {
+	
+}
+
+ConfigUser.prototype.init = function(){
+	this.handler();
+	this.setData();
+	this.updateUser();
+}
+
+ConfigUser.prototype.handler = function(){
+	$('.change-config').click(function(ev){
+		var t = $(ev.target);
+		var option = t.attr('data-option');
+		$('.form.active').fadeOut('fast', function(){
+			$(this).removeClass('active');
+			t.addClass('active').siblings().removeClass('active');
+			$('.form[data-form="' + option + '"]').addClass('active');
+			$('.form[data-form="' + option + '"]').fadeIn('fast');
+		});
+	});
+}
+
+ConfigUser.prototype.setData = function(){
+	var user = userLogued();
+	$('#name').val(user.nombre);
+	$('#surname').val(user.apellidos);
+	$('#email').val(user.email);
+	$('#birth').val(user.fechaNacimiento);
+	$('#phone').val(user.celular);
+	$('.avatar img').attr({src: user.avatar});
+	
+	$.each($('input:text'), function(index, value){
+		var text = $(value).val();
+		if(text != '') $(value).parent('label').addClass('focused');
+	});
+}
+
+ConfigUser.prototype.updateUser = function(){
+	var logued = userLogued();
+	$('#actualizar-info-personal').click(function(){
+		var user = {};
+		user.idLogin = logued.idLogin;
+		user.nombre = $('#name').val();
+		user.apellidos = $('#surname').val();
+		user.email = $('#email').val();
+		user.fechaNacimiento = $('#birth').val();
+		user.celular = $('#phone').val();
+		
+		$.ajax({
+			url: contextPath + "/usuario/actualizar",
+			data: JSON.stringify(user),
+			contentType: "application/json; charset=utf-8",
+			type: 'POST',
+			dataType: 'json',
+			success: function(data){
+				sessionStorage.setItem('userLogued', JSON.stringify(data.result));
+				location.reload();
+			},
+			error: function(err){
+				console.log('Error en registro: ' + err);
+			}
+		});
+	});
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

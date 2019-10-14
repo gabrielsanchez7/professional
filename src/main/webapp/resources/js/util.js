@@ -7,8 +7,28 @@ var regexEmail = /^[-\w.%+]{1,64}@(?:[A-Za-z0-9-]{1,63}\.){1,125}[A-Za-z]{2,63}$
 var regexPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-\.]).{8,}$/;
 
 $(document).ready(function(){
+	getInitials();
 	focusField();
 });
+
+function userLogued(){
+	var user = sessionStorage.getItem('userLogued');
+	if(user != null) {
+		user = JSON.parse(user);
+	}
+	return user;
+}
+
+function getInitials(){
+	var user = userLogued();
+	if(user != null) {
+		var initials = (user.nombre.charAt(0) + user.apellidos.charAt(0)).toUpperCase();
+		$('header .initials').text(initials);
+	}
+	else {
+		$('header .auth').hide();
+	}
+}
 
 function focusField(){
 	$('input[type="text"], input[type="password"]').focusin(function(ev){
