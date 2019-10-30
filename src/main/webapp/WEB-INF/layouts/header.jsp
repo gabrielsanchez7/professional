@@ -10,10 +10,12 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700&display=swap" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/css/main.css" rel="stylesheet"/>
 	<link href="${pageContext.request.contextPath}/resources/css/fontawesome.min.css" rel="stylesheet"/>
+	<link href="${pageContext.request.contextPath}/resources/css/datepicker.min.css" rel="stylesheet"/>
 	<script src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/datepicker.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/moment.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/util.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/user.js"></script>
-<!-- 	<script src="https://apis.google.com/js/platform.js" async defer></script> -->
 	<script src="https://apis.google.com/js/api:client.js"></script>
 	
 	<script type="text/javascript">

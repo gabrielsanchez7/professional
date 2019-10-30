@@ -118,7 +118,7 @@ Authentication.prototype.googleLogin = function(){
 				}
 			});
 		}, function(error) {
-			alert(JSON.stringify(error, undefined, 2));
+			console.log(error);
 		});
 	}
 
@@ -157,6 +157,8 @@ ConfigUser.prototype.init = function(){
 	this.handler();
 	this.setData();
 	this.updateUser();
+	this.nuevaOferta();
+	this.editarOferta();
 }
 
 ConfigUser.prototype.handler = function(){
@@ -170,18 +172,26 @@ ConfigUser.prototype.handler = function(){
 			$('.form[data-form="' + option + '"]').fadeIn('fast');
 		});
 	});
+	
+	$('#birth').datepicker({
+		autoHide: true,
+		language: 'es-ES',
+		format: 'dd-MM-yyyy',
+		months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Setiembre', 'Octobre', 'Noviembre', 'Diciembre'],
+        daysMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+        pick: function(ev){
+        	$('#birth').parent('label').addClass('focused');
+        }
+	});
+	
+	$('#precio').focusin(function(ev){
+		var t = $(ev.target);
+		
+	});
 }
 
 ConfigUser.prototype.setData = function(){
-	var user = userLogued();
-	$('#name').val(user.nombre);
-	$('#surname').val(user.apellidos);
-	$('#email').val(user.email);
-	$('#birth').val(user.fechaNacimiento);
-	$('#phone').val(user.celular);
-	$('.avatar img').attr({src: user.avatar});
-	
-	$.each($('input:text'), function(index, value){
+	$.each($('input:text, textarea'), function(index, value){
 		var text = $(value).val();
 		if(text != '') $(value).parent('label').addClass('focused');
 	});
@@ -195,12 +205,24 @@ ConfigUser.prototype.updateUser = function(){
 		user.nombre = $('#name').val();
 		user.apellidos = $('#surname').val();
 		user.email = $('#email').val();
-		user.fechaNacimiento = $('#birth').val();
+		user.fechaNacimiento = moment($('#birth').val(), 'DD-MM-YYYY');
 		user.celular = $('#phone').val();
 		
+		updateRequest(user);
+	});
+	
+	$('#actualizar-rol').click(function(){
+		var obj = {};
+		obj.idLogin = logued.idLogin;
+		obj.rol = "proff";
+		
+		updateRequest(obj);
+	});
+	
+	function updateRequest(object){
 		$.ajax({
 			url: contextPath + "/usuario/actualizar",
-			data: JSON.stringify(user),
+			data: JSON.stringify(object),
 			contentType: "application/json; charset=utf-8",
 			type: 'POST',
 			dataType: 'json',
@@ -210,6 +232,64 @@ ConfigUser.prototype.updateUser = function(){
 			},
 			error: function(err){
 				console.log('Error en registro: ' + err);
+			}
+		});
+	}
+}
+
+ConfigUser.prototype.nuevaOferta = function(){
+	$('#nueva-oferta').click(function(ev){
+		openModal('#modal-nueva-oferta');
+	});
+	
+	$('#crear-nueva-oferta').click(function(){
+		var obj = {
+			precioHora: $('#precio').val(),
+			descripcion: $('#descripcion-oferta').val(),
+			especialidad: {idEspecialidad: $('#especialidad').val()}
+		};
+		
+		$.ajax({
+			url: contextPath + "/oferta/registrar",
+			data: JSON.stringify(obj),
+			contentType: "application/json; charset=utf-8",
+			type: 'POST',
+			dataType: 'json',
+			success: function(data){
+				location.reload();
+			},
+			error: function(err){
+				console.log('Error en registro de oferta: ' + err);
+			}
+		});
+	});
+}
+
+ConfigUser.prototype.editarOferta = function(){
+	var ob = this;
+	
+	$('.editar-oferta').click(function(ev){
+		var id = $(ev.target).attr('data-id');
+		var obj = {idOferta: id};
+		
+		$.ajax({
+			url: contextPath + "/oferta/listar",
+			data: obj,
+			contentType: "application/json; charset=utf-8",
+			type: 'GET',
+			dataType: 'json',
+			success: function(data){
+				openModal('#modal-nueva-oferta');
+				var oferta = data.result[0];
+				$('#descripcion-oferta').val(oferta.descripcion);
+				$('#especialidad').val(oferta.especialidad.idEspecialidad);
+				$('#especialidad').prev('input:text').val(oferta.especialidad.descripcion);
+				$('#precio').val(oferta.precioHora);
+				$('#precio').siblings('.prefix-precio').show();
+				ob.setData();
+			},
+			error: function(err){
+				console.log('Error al obtener la ofertas: ' + err);
 			}
 		});
 	});

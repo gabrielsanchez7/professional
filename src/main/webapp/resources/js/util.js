@@ -9,6 +9,8 @@ var regexPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-\.]).
 $(document).ready(function(){
 	getInitials();
 	focusField();
+	dropdown();
+	closeModal();
 });
 
 function userLogued(){
@@ -31,19 +33,22 @@ function getInitials(){
 }
 
 function focusField(){
-	$('input[type="text"], input[type="password"]').focusin(function(ev){
+	$('input[type="text"]:not(.drop-button), input[type="password"], textarea').focusin(function(ev){
 		var t = $(ev.target);
 		var content = t.val();
 		t.closest('label').addClass('focused');
+		if(t.is('#precio')) t.siblings('.prefix-precio').show();
 	});
 	
-	$('input[type="text"], input[type="password"]').focusout(function(ev){
+	$('input[type="text"]:not(.drop-button), input[type="password"], textarea').focusout(function(ev){
 		var t = $(ev.target);
 		var content = t.val();
 		
 		if(content == ""){
 			t.closest('label').removeClass('focused');
 		}
+		
+		if(t.is('#precio') && content == "") t.siblings('.prefix-precio').hide();
 	});
 }
 
@@ -78,3 +83,70 @@ function validationFields(form){
 	fields = $(form).find("[data-validate='false']");
 	return fields.length == 0;
 }
+
+var opened = false;
+function dropdown() {
+	$('.drop').click(function(ev){
+		var t = $(ev.target);
+		t = (!t.is('label')) ? t.closest('label') : t;
+		
+		if(!opened){
+			t.find('.drop-list').slideDown('fast', function(){
+				opened = true;
+			});
+		}
+		else {
+			t.find('.drop-list').slideUp('fast', function(){
+				opened = false;
+			});
+		}
+		return false;
+	});
+	
+	$('.drop-item').click(function(ev){
+		var t = $(ev.target);
+		var id = t.attr('data-id');
+		var text = t.text();
+		
+		t.closest('label').find('input:text').val(text);
+		t.closest('label').find('input:hidden').val(id);
+		
+		t.closest('label').addClass('focused');
+	});
+}
+
+function openModal(modal){
+	$(modal).fadeIn('fast', function() {
+		$(modal).find('.modal').css({transform: 'translateY(0)'});
+	}).css({display: 'flex'});
+}
+
+function closeModal(){
+	$('.close-modal').click(function(ev){
+		var t = $(ev.target);
+		t.closest('.modal').removeAttr('style');
+		setTimeout(function(){
+			t.closest('.back-modal').fadeOut('fast');
+		}, 150);
+	});
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

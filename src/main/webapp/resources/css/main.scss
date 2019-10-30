@@ -83,7 +83,7 @@ label {
     align-items: center;
     margin-bottom: 10px;
     cursor: text;
-    input[type="text"], input[type="password"] {
+    input[type="text"], input[type="password"], textarea {
         width: 100%;
         border: 1px solid $borderGray;
         border-radius: 5px;
@@ -92,6 +92,12 @@ label {
         padding: 0 40px 0 15px;
         font-size: 13px;
         max-height: 48px;
+    }
+    textarea {
+    	max-height: none;
+    	line-height: normal;
+    	padding-top: 20px;
+    	resize: none;
     }
     .placeholder {
         position: absolute;
@@ -130,27 +136,65 @@ label {
             margin-top: 4px;
         }
     }
+    &.drop {
+    	input, span, i { cursor: pointer; }
+    	.drop-list {
+    		display: none;
+    		position: absolute;
+    		left: 0;
+    		background-color: #fff;
+    		border: 1px solid $borderGray;
+    		border-radius: 5px;
+    		z-index: 1;
+   			top: 50px;
+   			padding: 10px 0;
+    		li {
+    			list-style: none;
+    			width: 100%;
+    			padding: 0 40px 0 10px;
+    			line-height: 30px;
+    			font-size: 11px;
+    			transition: $fast;
+    			cursor: pointer;
+    			&:hover { background-color: $hoverButton; }
+    		}
+    	}
+    }
+    .prefix-precio {
+    	position: absolute;
+    	display: none;
+    	line-height: 36px;
+    	left: 15px;
+    	padding-top: 12px;
+    	& + #precio { padding-left: 30px; }
+    }
 }
 
 .btn {
 	display: block;
-	line-height: 46px;
+	line-height: 40px;
 	border: 1px solid;
 	border-radius: 5px;
 	font-size: 12px;
-	width: 110px;
+	width: 120px;
 	text-align: center;
 	cursor: pointer;
 	outline: none;
 	appearance: none;
+	transition: $fast;
 	&.btn-on {
 		border-color: $primaryColor;
 		background-color: $primaryColor;
 		color: #fff;
+		i {
+			color: #fff;
+			margin-right: 3px;
+		}
 	}
 	&.btn-off {
 		border-color: $borderGray;
 		color: $textGray;
+		&:hover { background-color: $hoverButton; }
 	}
 }
 
@@ -181,6 +225,53 @@ header  {
     		}
     	}
     }
+}
+
+.back-modal {
+	background-color: rgba(0,0,0,0.8);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	.modal {
+		background-color: #fff;
+		width: 100%;
+		max-width: 450px;
+		border-radius: 10px;
+		height: 80vh;
+		padding: 40px 30px;
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		overflow: auto;
+		transform: translateY(200%);
+		transition: 0.25s;
+		& > div:not(.buttons) {
+			.close-modal {
+				position: absolute;
+				top: 15px;
+				right: 15px;
+				cursor: pointer;
+			}
+			h3 {
+				font-size: 18px;
+				margin-bottom: 30px;
+			}
+		}
+		.buttons {
+			border-top: 1px solid $borderGray;
+			padding-top: 25px;
+			margin-top: 60px;
+			display: flex;
+			justify-content: flex-end;
+			button:first-child { margin-right: 10px; }
+		}
+	}
 }
 
 #choosePage {
@@ -355,7 +446,14 @@ header  {
 		.config-menu {
 			width: 300px;
 			margin-right: 40px;
-			li {
+			li.divider {
+				display: block;
+				width: 100%;
+				height: 1px;
+				background-color: $borderGray;
+				margin: 20px 0;
+			}
+			li:not(.divider) {
 				list-style: none;
 				display: block;
 				width: 100%;
@@ -532,10 +630,141 @@ header  {
 				width: auto;
 				padding: 0 15px;
 			}
+			#lista-ofertas {
+				display: flex;
+				flex-wrap: wrap;
+				margin-top: 30px;
+				.oferta {
+					width: calc(100% / 2 - 12px);
+					border: 1px solid $borderGray;
+					border-radius: 5px;
+					padding: 24px;
+					margin-bottom: 24px;
+					&:not(:nth-child(2n)) { margin-right: 24px; }
+					.label {
+						font-size: 11px;
+						color: $textGray;
+						font-weight: 400;
+						display: block;
+					}
+					.options {
+						border-bottom: 1px solid $borderGray;
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
+						padding-bottom: 10px;
+						margin-bottom: 25px;
+						.id { font-weight: bold; }
+						.buttons {
+							margin-top: 0;
+							button {
+								appearance: none;
+								height: 30px;
+								border: none;
+								cursor: pointer;
+								outline: none;
+								* { pointer-events: none; }
+								&#editar-oferta { margin-right: 15px; }
+								i { color: $primaryColor; }
+							}
+						}
+					}
+					.descripcion {
+						display: -webkit-box;
+						-webkit-line-clamp: 4;
+						-webkit-box-orient: vertical;
+						overflow: hidden;
+						text-overflow: ellipsis;
+						margin-bottom: 15px;
+					}
+					.especialidad { margin-bottom: 15px; }
+					.precio {
+						font-size: 20px;
+						font-weight: bold;
+					}
+				}
+			}
 		}
 	}
 }
 
+#home-page {
+	padding-bottom: 150px;
+	.banner {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		overflow: hidden;
+	}
+	h1 {
+		text-align: center;
+		font-size: 22px;
+		margin: 40px auto 20px auto;
+	}
+	.lista-ofertas {
+		margin: 0 auto;
+		width: 100%;
+		max-width: 1200px;
+		display: flex;
+		flex-wrap: wrap;
+		article {
+			width: calc(100% / 2 - 20px / 2);
+			border: 1px solid $borderGray;
+			border-radius: 5px;
+			padding: 30px;
+			margin-bottom: 20px;
+			&:not(:nth-child(2n)) { margin-right: 20px; }
+			.head {
+				display: flex;
+				align-items: center;
+				.avatar {
+					display: block;
+					height: 60px;
+					width: 60px;
+					border-radius: 50%;
+					margin-right: 20px;
+				}
+				.label {
+					font-size: 12px;
+					color: $textGray;
+				}
+				.name {
+					font-weight: bold;
+				}
+			}
+			.desc {
+				margin-left: 80px;
+				border-top: 1px solid $borderGray;
+				padding-top: 15px;
+				margin-top: 10px;
+				display: -webkit-box;
+				-webkit-line-clamp: 4;
+				-webkit-box-orient: vertical;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				min-height: 92px;
+			}
+			.fot {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				margin-left: 80px;
+				margin-top: 30px;
+				border-top: 1px solid $borderGray;
+				padding-top: 20px;
+				.label {
+					font-size: 12px;
+					color: $textGray;
+					font-weight: 400;
+				}
+				.precio {
+					font-weight: bold;
+					font-size: 20px;
+				}
+			}
+		}
+	}
+}
 
 
 

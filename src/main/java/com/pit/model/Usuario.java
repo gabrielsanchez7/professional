@@ -56,6 +56,10 @@ public class Usuario implements Serializable {
 	@Column(name="fecha_registro")
 	private Date fechaRegistro;
 	
+	@Column
+	private String rol;
+	
+	private Ubigeo ubigeo;
 
 	public int getIdUsuario() {
 		return idUsuario;
@@ -159,6 +163,22 @@ public class Usuario implements Serializable {
 
 	public void setFechaRegistro(Date fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
+	}
+
+	public String getRol() {
+		return rol;
+	}
+
+	public void setRol(String rol) {
+		this.rol = rol;
+	}
+
+	public Ubigeo getUbigeo() {
+		return ubigeo;
+	}
+
+	public void setUbigeo(Ubigeo ubigeo) {
+		this.ubigeo = ubigeo;
 	}
 
 }

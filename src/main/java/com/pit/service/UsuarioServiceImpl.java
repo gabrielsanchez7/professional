@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pit.dao.UsuarioDAO;
+import com.pit.model.Especialidad;
 import com.pit.model.Usuario;
 
 @Service
@@ -20,18 +21,18 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public List<Usuario> obtenerUsuarios(int codigoUsuario) {
-		return usuarioDAO.obtenerUsuarios(codigoUsuario);
-	}
-
-	@Override
-	public int actualizarUsuario(Usuario usuario) {
+	public String actualizarUsuario(Usuario usuario) {
 		return usuarioDAO.actualizarUsuario(usuario);
 	}
 
 	@Override
 	public Usuario obtenerUsuario(String idLogin) {
 		return usuarioDAO.obtenerUsuario(idLogin);
+	}
+
+	@Override
+	public List<Especialidad> listaEspecialidades() {
+		return usuarioDAO.listaEspecialidades();
 	}
 
 }

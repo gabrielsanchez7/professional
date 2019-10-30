@@ -1,5 +1,6 @@
 package com.pit.dao;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -7,13 +8,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceContext;
 import javax.persistence.StoredProcedureQuery;
-import javax.transaction.Transactional;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.pit.model.Especialidad;
+import com.pit.model.Ubigeo;
 import com.pit.model.Usuario;
 
 @Repository
@@ -21,9 +21,6 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
-	
-	@Autowired
-	private SessionFactory sessionFactory;
 
 	@Override
 	@Transactional
@@ -56,28 +53,10 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return result;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<Usuario> obtenerUsuarios(int codigoUsuario) {
-		List<Usuario> lista = null;
-		try {
-			StoredProcedureQuery proc = entityManager.createStoredProcedureQuery("sp_obtener_usuarios");
-			proc.registerStoredProcedureParameter("codigo", int.class, ParameterMode.IN);
-			proc.setParameter("codigo", codigoUsuario);
-			proc.execute(); 
-			
-			lista = (List<Usuario>) proc.getResultList();
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return lista;
-	}
-
-	@Override
-	public int actualizarUsuario(Usuario usuario) {
-		int result = 0;
+	@Transactional
+	public String actualizarUsuario(Usuario usuario) {
+		String result = null;
 		
 		try {
 			StoredProcedureQuery proc = entityManager.createStoredProcedureQuery("sp_actualizar_usuario");
@@ -91,6 +70,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			proc.registerStoredProcedureParameter("var_celular", String.class, ParameterMode.IN);
 			proc.registerStoredProcedureParameter("var_calificacion", int.class, ParameterMode.IN);
 			proc.registerStoredProcedureParameter("var_presentacion", String.class, ParameterMode.IN);
+			proc.registerStoredProcedureParameter("var_rol", String.class, ParameterMode.IN);
+			proc.registerStoredProcedureParameter("var_id_ubigeo", String.class, ParameterMode.IN);
 			
 			proc.setParameter("var_id_login", usuario.getIdLogin());
 			proc.setParameter("var_nombre", usuario.getNombre());
@@ -102,9 +83,11 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			proc.setParameter("var_celular", usuario.getCelular());
 			proc.setParameter("var_calificacion", usuario.getCalificacion());
 			proc.setParameter("var_presentacion", usuario.getPresentacion());
+			proc.setParameter("var_rol", usuario.getRol());
+			proc.setParameter("var_id_ubigeo", usuario.getUbigeo() == null ? null : usuario.getUbigeo().getIdubigeo());
 			
 			proc.execute();
-			result = proc.getUpdateCount();
+			result = (String)proc.getSingleResult();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -113,19 +96,16 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return result;
 	}
 
-	@SuppressWarnings({ "unchecked", "null" })
+	@SuppressWarnings({ "unchecked"})
 	@Override
 	public Usuario obtenerUsuario(String idLogin) {
 		Usuario usuario = null;
 		
 		try {
-//			Session session = sessionFactory.getCurrentSession();
-//			usuario = session.createStoredProcedureCall("sp_obtener_usuario").
 			StoredProcedureQuery proc = entityManager.createStoredProcedureQuery("sp_obtener_usuario");
 			proc.registerStoredProcedureParameter("var_id_login", String.class, ParameterMode.IN);
 			
 			proc.setParameter("var_id_login", idLogin);
-//			usuario = (Usuario)proc.getSingleResult();
 			List<Object[]> lista = proc.getResultList();
 			for(Object[] obj : lista) {
 				usuario = new Usuario();
@@ -138,19 +118,43 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 				usuario.setFechaNacimiento((Date)obj[6]);
 				usuario.setAvatar((String)obj[7]);
 				usuario.setCelular((String)obj[8]);
-				usuario.setCalificacion((int)obj[9]);
+				usuario.setCalificacion(obj[9] == null ? 0 : (int)obj[9]);
 				usuario.setPresentacion((String)obj[10]);
 				usuario.setTipoLogin((String)obj[11]);
 				usuario.setFechaRegistro((Date)obj[12]);
+				
+				Ubigeo ubigeo = new Ubigeo();
+				ubigeo.setIdubigeo(obj[13] == null ? 0 : (int)obj[13]);
+				usuario.setUbigeo(ubigeo);
+				
+				usuario.setRol((String)obj[14]);
 			}
-			
-			return usuario;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		return usuario;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Especialidad> listaEspecialidades() {
+		List<Especialidad> listaEspecialidades = new ArrayList<>();
+		try {
+			StoredProcedureQuery proc = entityManager.createStoredProcedureQuery("sp_obtener_especialidades");
+			List<Object[]> lista = proc.getResultList();
+			for(Object[] obj : lista) {
+				Especialidad especialidad = new Especialidad();
+				especialidad.setIdEspecialidad((int)obj[0]);
+				especialidad.setDescripcion((String)obj[1]);
+				
+				listaEspecialidades.add(especialidad);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return listaEspecialidades;
 	}
 	
 }

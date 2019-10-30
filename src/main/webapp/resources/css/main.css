@@ -81,7 +81,7 @@ label {
   margin-bottom: 10px;
   cursor: text;
 }
-label input[type=text], label input[type=password] {
+label input[type=text], label input[type=password], label textarea {
   width: 100%;
   border: 1px solid #e4e4e4;
   border-radius: 5px;
@@ -90,6 +90,12 @@ label input[type=text], label input[type=password] {
   padding: 0 40px 0 15px;
   font-size: 13px;
   max-height: 48px;
+}
+label textarea {
+  max-height: none;
+  line-height: normal;
+  padding-top: 20px;
+  resize: none;
 }
 label .placeholder {
   position: absolute;
@@ -134,27 +140,71 @@ label.error .inline-error {
   padding-left: 7px;
   margin-top: 4px;
 }
+label.drop input, label.drop span, label.drop i {
+  cursor: pointer;
+}
+label.drop .drop-list {
+  display: none;
+  position: absolute;
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #e4e4e4;
+  border-radius: 5px;
+  z-index: 1;
+  top: 50px;
+  padding: 10px 0;
+}
+label.drop .drop-list li {
+  list-style: none;
+  width: 100%;
+  padding: 0 40px 0 10px;
+  line-height: 30px;
+  font-size: 11px;
+  transition: 0.15s;
+  cursor: pointer;
+}
+label.drop .drop-list li:hover {
+  background-color: #fafafa;
+}
+label .prefix-precio {
+  position: absolute;
+  display: none;
+  line-height: 36px;
+  left: 15px;
+  padding-top: 12px;
+}
+label .prefix-precio + #precio {
+  padding-left: 30px;
+}
 
 .btn {
   display: block;
-  line-height: 46px;
+  line-height: 40px;
   border: 1px solid;
   border-radius: 5px;
   font-size: 12px;
-  width: 110px;
+  width: 120px;
   text-align: center;
   cursor: pointer;
   outline: none;
   appearance: none;
+  transition: 0.15s;
 }
 .btn.btn-on {
   border-color: #08767d;
   background-color: #08767d;
   color: #fff;
 }
+.btn.btn-on i {
+  color: #fff;
+  margin-right: 3px;
+}
 .btn.btn-off {
   border-color: #e4e4e4;
   color: #a0a0a0;
+}
+.btn.btn-off:hover {
+  background-color: #fafafa;
 }
 
 header {
@@ -182,6 +232,53 @@ header .auth .initials:hover {
   background-color: #08767d;
   border-color: #08767d;
   color: #fff;
+}
+
+.back-modal {
+  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.back-modal .modal {
+  background-color: #fff;
+  width: 100%;
+  max-width: 450px;
+  border-radius: 10px;
+  height: 80vh;
+  padding: 40px 30px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: auto;
+  transform: translateY(200%);
+  transition: 0.25s;
+}
+.back-modal .modal > div:not(.buttons) .close-modal {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+}
+.back-modal .modal > div:not(.buttons) h3 {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+.back-modal .modal .buttons {
+  border-top: 1px solid #e4e4e4;
+  padding-top: 25px;
+  margin-top: 60px;
+  display: flex;
+  justify-content: flex-end;
+}
+.back-modal .modal .buttons button:first-child {
+  margin-right: 10px;
 }
 
 #choosePage {
@@ -377,7 +474,14 @@ header .auth .initials:hover {
   width: 300px;
   margin-right: 40px;
 }
-#config-account-page .content-forms .config-menu li {
+#config-account-page .content-forms .config-menu li.divider {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: #e4e4e4;
+  margin: 20px 0;
+}
+#config-account-page .content-forms .config-menu li:not(.divider) {
   list-style: none;
   display: block;
   width: 100%;
@@ -389,24 +493,24 @@ header .auth .initials:hover {
   cursor: pointer;
   transition: 0.15s;
 }
-#config-account-page .content-forms .config-menu li:not(:last-child) {
+#config-account-page .content-forms .config-menu li:not(.divider):not(:last-child) {
   margin-bottom: 5px;
 }
-#config-account-page .content-forms .config-menu li:hover {
+#config-account-page .content-forms .config-menu li:not(.divider):hover {
   background-color: #fafafa;
 }
-#config-account-page .content-forms .config-menu li .fas {
+#config-account-page .content-forms .config-menu li:not(.divider) .fas {
   color: #a0a0a0;
   transition: 0.15s;
   margin-right: 5px;
   width: 24px;
   text-align: center;
 }
-#config-account-page .content-forms .config-menu li.active {
+#config-account-page .content-forms .config-menu li:not(.divider).active {
   background-color: #08767d;
   color: #fff;
 }
-#config-account-page .content-forms .config-menu li.active .fas {
+#config-account-page .content-forms .config-menu li:not(.divider).active .fas {
   color: #fff;
 }
 #config-account-page .content-forms .form {
@@ -571,6 +675,152 @@ header .auth .initials:hover {
 #config-account-page .content-forms .form .sure + button {
   width: auto;
   padding: 0 15px;
+}
+#config-account-page .content-forms .form #lista-ofertas {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+#config-account-page .content-forms .form #lista-ofertas .oferta {
+  width: calc(100% / 2 - 12px);
+  border: 1px solid #e4e4e4;
+  border-radius: 5px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+#config-account-page .content-forms .form #lista-ofertas .oferta:not(:nth-child(2n)) {
+  margin-right: 24px;
+}
+#config-account-page .content-forms .form #lista-ofertas .oferta .label {
+  font-size: 11px;
+  color: #a0a0a0;
+  font-weight: 400;
+  display: block;
+}
+#config-account-page .content-forms .form #lista-ofertas .oferta .options {
+  border-bottom: 1px solid #e4e4e4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  margin-bottom: 25px;
+}
+#config-account-page .content-forms .form #lista-ofertas .oferta .options .id {
+  font-weight: bold;
+}
+#config-account-page .content-forms .form #lista-ofertas .oferta .options .buttons {
+  margin-top: 0;
+}
+#config-account-page .content-forms .form #lista-ofertas .oferta .options .buttons button {
+  appearance: none;
+  height: 30px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+#config-account-page .content-forms .form #lista-ofertas .oferta .options .buttons button * {
+  pointer-events: none;
+}
+#config-account-page .content-forms .form #lista-ofertas .oferta .options .buttons button#editar-oferta {
+  margin-right: 15px;
+}
+#config-account-page .content-forms .form #lista-ofertas .oferta .options .buttons button i {
+  color: #08767d;
+}
+#config-account-page .content-forms .form #lista-ofertas .oferta .descripcion {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 15px;
+}
+#config-account-page .content-forms .form #lista-ofertas .oferta .especialidad {
+  margin-bottom: 15px;
+}
+#config-account-page .content-forms .form #lista-ofertas .oferta .precio {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#home-page {
+  padding-bottom: 150px;
+}
+#home-page .banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+#home-page h1 {
+  text-align: center;
+  font-size: 22px;
+  margin: 40px auto 20px auto;
+}
+#home-page .lista-ofertas {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-wrap: wrap;
+}
+#home-page .lista-ofertas article {
+  width: calc(100% / 2 - 20px / 2);
+  border: 1px solid #e4e4e4;
+  border-radius: 5px;
+  padding: 30px;
+  margin-bottom: 20px;
+}
+#home-page .lista-ofertas article:not(:nth-child(2n)) {
+  margin-right: 20px;
+}
+#home-page .lista-ofertas article .head {
+  display: flex;
+  align-items: center;
+}
+#home-page .lista-ofertas article .head .avatar {
+  display: block;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+#home-page .lista-ofertas article .head .label {
+  font-size: 12px;
+  color: #a0a0a0;
+}
+#home-page .lista-ofertas article .head .name {
+  font-weight: bold;
+}
+#home-page .lista-ofertas article .desc {
+  margin-left: 80px;
+  border-top: 1px solid #e4e4e4;
+  padding-top: 15px;
+  margin-top: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 92px;
+}
+#home-page .lista-ofertas article .fot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 80px;
+  margin-top: 30px;
+  border-top: 1px solid #e4e4e4;
+  padding-top: 20px;
+}
+#home-page .lista-ofertas article .fot .label {
+  font-size: 12px;
+  color: #a0a0a0;
+  font-weight: 400;
+}
+#home-page .lista-ofertas article .fot .precio {
+  font-weight: bold;
+  font-size: 20px;
 }
 
 /*# sourceMappingURL=main.css.map */
