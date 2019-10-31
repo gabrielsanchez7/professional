@@ -73,6 +73,17 @@
   margin-right: 10px;
 }
 
+.three-group-label {
+  display: flex;
+  align-items: center;
+}
+.three-group-label label {
+  width: calc(100% / 3);
+}
+.three-group-label label:not(:last-child) {
+  margin-right: 10px;
+}
+
 label {
   position: relative;
   display: flex;
@@ -757,42 +768,102 @@ header .auth .initials:hover {
   font-size: 22px;
   margin: 40px auto 20px auto;
 }
-#home-page .lista-ofertas {
+#home-page .container {
+  display: flex;
+  align-items: flex-start;
   margin: 0 auto;
-  width: 100%;
   max-width: 1200px;
+}
+#home-page .container .filtros {
+  width: 25%;
+  margin-right: 40px;
+  background-color: #fff;
+  border: 1px solid #e4e4e4;
+  box-shadow: 0 1px 16px 1px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+  padding: 24px;
+}
+#home-page .container .filtros > div:not(:last-child) {
+  margin-bottom: 30px;
+}
+#home-page .container .filtros > div > p {
+  font-size: 14px;
+  color: #a0a0a0;
+  margin-bottom: 20px;
+}
+#home-page .container .filtros > div label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  flex-direction: row;
+  cursor: pointer;
+}
+#home-page .container .filtros > div label input {
+  margin-right: 10px;
+}
+#home-page .container .filtros > div label span {
+  font-size: 14px;
+}
+#home-page .container .filtros > div > div {
+  display: flex;
+  align-items: center;
+}
+#home-page .container .filtros > div > div input[type=text] {
+  line-height: 44px;
+  border: 1px solid #e4e4e4;
+  border-radius: 5px;
+  outline: none;
+  padding: 0 12px;
+  width: 100%;
+  font-size: 12px;
+  text-align: center;
+}
+#home-page .container .filtros > div > div input[type=text]::placeholder {
+  color: #a9a9a9;
+}
+#home-page .container .filtros > div > div span {
+  font-size: 20px;
+  font-weight: 500;
+  padding: 0 10px;
+}
+#home-page .container .filtros > div button {
+  margin-top: 10px;
+  width: 100%;
+}
+#home-page .container .lista-ofertas {
+  width: 75%;
   display: flex;
   flex-wrap: wrap;
 }
-#home-page .lista-ofertas article {
+#home-page .container .lista-ofertas article {
   width: calc(100% / 2 - 20px / 2);
   border: 1px solid #e4e4e4;
   border-radius: 5px;
   padding: 30px;
   margin-bottom: 20px;
 }
-#home-page .lista-ofertas article:not(:nth-child(2n)) {
+#home-page .container .lista-ofertas article:not(:nth-child(2n)) {
   margin-right: 20px;
 }
-#home-page .lista-ofertas article .head {
+#home-page .container .lista-ofertas article .head {
   display: flex;
   align-items: center;
 }
-#home-page .lista-ofertas article .head .avatar {
+#home-page .container .lista-ofertas article .head .avatar {
   display: block;
   height: 60px;
   width: 60px;
   border-radius: 50%;
   margin-right: 20px;
 }
-#home-page .lista-ofertas article .head .label {
+#home-page .container .lista-ofertas article .head .label {
   font-size: 12px;
   color: #a0a0a0;
 }
-#home-page .lista-ofertas article .head .name {
+#home-page .container .lista-ofertas article .head .name {
   font-weight: bold;
 }
-#home-page .lista-ofertas article .desc {
+#home-page .container .lista-ofertas article .desc {
   margin-left: 80px;
   border-top: 1px solid #e4e4e4;
   padding-top: 15px;
@@ -804,7 +875,7 @@ header .auth .initials:hover {
   text-overflow: ellipsis;
   min-height: 92px;
 }
-#home-page .lista-ofertas article .fot {
+#home-page .container .lista-ofertas article .fot {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -813,12 +884,12 @@ header .auth .initials:hover {
   border-top: 1px solid #e4e4e4;
   padding-top: 20px;
 }
-#home-page .lista-ofertas article .fot .label {
+#home-page .container .lista-ofertas article .fot .label {
   font-size: 12px;
   color: #a0a0a0;
   font-weight: 400;
 }
-#home-page .lista-ofertas article .fot .precio {
+#home-page .container .lista-ofertas article .fot .precio {
   font-weight: bold;
   font-size: 20px;
 }
