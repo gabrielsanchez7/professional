@@ -50,14 +50,20 @@ public class OfertaDAOImpl implements OfertaDAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Oferta> listaOfertas(int idUsuario, int idOferta) {
+	public List<Oferta> listaOfertas(int idUsuario, int idOferta, int idEspecialidad, double menorPrecio, double mayorPrecio) {
 		List<Oferta> listaOfertas = new ArrayList<>();
 		try {
 			StoredProcedureQuery proc = entityManager.createStoredProcedureQuery("sp_obtener_ofertas");
 			proc.registerStoredProcedureParameter("var_id_usuario", int.class, ParameterMode.IN);
 			proc.registerStoredProcedureParameter("var_id_oferta", int.class, ParameterMode.IN);
+			proc.registerStoredProcedureParameter("var_id_especialidad", int.class, ParameterMode.IN);
+			proc.registerStoredProcedureParameter("var_menor_precio", double.class, ParameterMode.IN);
+			proc.registerStoredProcedureParameter("var_mayor_precio", double.class, ParameterMode.IN);
 			proc.setParameter("var_id_usuario", idUsuario);
 			proc.setParameter("var_id_oferta", idOferta);
+			proc.setParameter("var_id_especialidad", idEspecialidad);
+			proc.setParameter("var_menor_precio", menorPrecio);
+			proc.setParameter("var_mayor_precio", mayorPrecio);
 			
 			List<Object[]> lista = proc.getResultList();
 			for(Object[] obj : lista) {

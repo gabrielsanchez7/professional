@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.12, for macos10.13 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.18, for macos10.14 (x86_64)
 --
 -- Host: localhost    Database: Professional
 -- ------------------------------------------------------
--- Server version	8.0.12
+-- Server version	8.0.18
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
- SET NAMES utf8 ;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -93,23 +93,44 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_obtener_ofertas`(
 	var_id_usuario int,
-    var_id_oferta int
+    var_id_oferta int,
+    var_id_especialidad int,
+    var_menor_precio double,
+    var_mayor_precio double
 )
 BEGIN
 
-	Select * from tb_oferta
-    where case
-		when var_id_usuario is not null then id_usuario = var_id_usuario
-        when var_id_oferta is not null then id_oferta = var_id_oferta
-    end;
+	Select
+		ofe.id_oferta,
+		ofe.descripcion as 'descripcion oferta',
+		ofe.precio_hora,
+		us.id_usuario,
+		us.nombre,
+		us.apellidos,
+		us.avatar,
+		us.celular,
+		us.calificacion,
+		us.presentacion,
+		es.id_especialidad,
+		es.descripcion as 'descripcion especialidad'
+	from tb_oferta ofe 
+	inner join tb_usuario us on ofe.id_usuario = us.id_usuario
+	inner join tb_especialidad es on ofe.id_especialidad = es.id_especialidad
+	where case
+		when var_id_usuario <> 0 then us.id_usuario = var_id_usuario
+        when var_id_oferta <> 0 then ofe.id_oferta = var_id_oferta
+        when var_id_especialidad <> 0 then es.id_especialidad = var_id_especialidad
+        when var_menor_precio <> 0 and var_mayor_precio <> 0 then ofe.precio_hora between var_menor_precio and var_mayor_precio
+        else true
+	end;
 
 END ;;
 DELIMITER ;
@@ -141,11 +162,11 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registrar_oferta`(
 	var_id_usuario int,
@@ -155,10 +176,14 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registrar_oferta`(
 )
 BEGIN
 
-	Insert into tb_usuario(id_usuario, id_especialidad, descripcion, precio_hora)
+	Insert into tb_oferta(id_usuario, id_especialidad, descripcion, precio_hora)
 	values(var_id_usuario, var_id_especialidad, var_descripcion, var_precio_hora);
 	
-	Select row_count();
+	if row_count() > 0 then
+		Select concat(last_insert_id(), '');
+    else
+		Select -1;
+	end if;
 
 END ;;
 DELIMITER ;
@@ -211,4 +236,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-29 23:22:28
+-- Dump completed on 2019-11-17 23:06:05

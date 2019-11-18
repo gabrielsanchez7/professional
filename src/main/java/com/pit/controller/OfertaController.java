@@ -55,7 +55,7 @@ public class OfertaController {
 		Usuario logued = UtilWeb.usuarioLogin(request);
 		
 		try {
-			List<Oferta> listaOfertas = ofertaService.listaOfertas(logued.getIdUsuario(), idOferta);
+			List<Oferta> listaOfertas = ofertaService.listaOfertas(logued.getIdUsuario(), idOferta, 0, 0, 0);
 			bResult.setCodigo(200);
 			bResult.setResult(listaOfertas);
 		} catch (Exception e) {

@@ -41,7 +41,7 @@ public class AuthenticationController {
 		Usuario logued = (Usuario)session.getAttribute("userLogued");
 		if(logued != null) {
 			List<Especialidad> listaEspecialidades = usuarioService.listaEspecialidades();
-			List<Oferta> listaOfertas = ofertaService.listaOfertas(logued.getIdUsuario(), 0);
+			List<Oferta> listaOfertas = ofertaService.listaOfertas(logued.getIdUsuario(), 0, 0, 0, 0);
 			
 			model.addAttribute("logued", true);
 			model.addAttribute("usuario", logued);

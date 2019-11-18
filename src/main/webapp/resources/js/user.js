@@ -159,6 +159,7 @@ ConfigUser.prototype.init = function(){
 	this.updateUser();
 	this.nuevaOferta();
 	this.editarOferta();
+	this.elegirUbigeo();
 }
 
 ConfigUser.prototype.handler = function(){
@@ -207,6 +208,7 @@ ConfigUser.prototype.updateUser = function(){
 		user.email = $('#email').val();
 		user.fechaNacimiento = moment($('#birth').val(), 'DD-MM-YYYY');
 		user.celular = $('#phone').val();
+		user.ubigeo = {idUbigeo: $('#distrito').val()};
 		
 		updateRequest(user);
 	});
@@ -293,6 +295,52 @@ ConfigUser.prototype.editarOferta = function(){
 			}
 		});
 	});
+}
+
+ConfigUser.prototype.elegirUbigeo = function(){
+	var ob = this;
+	
+	$('.drop-ciudad li').click(function(ev){
+		var obj = {ciudad: $(ev.target).text()};
+		$('.drop-provincia, .drop-distrito').html('');
+		$('.drop-provincia, .drop-distrito').siblings('.drop-button').val('');
+		$('.drop-provincia, .drop-distrito').siblings('input:hidden').val('');
+		$('.drop-provincia, .drop-distrito').parent('.drop').removeClass('focused');
+		callAjax(obj, 'provincia');
+	});
+	
+	function callAjax(obj, llenar){
+		$.ajax({
+			url: contextPath + "/usuario/ubigeo",
+			data: obj,
+			contentType: "application/json; charset=utf-8",
+			type: 'GET',
+			dataType: 'json',
+			success: function(data){
+				$.each(data.result, function(index, value){
+					var field = llenar == "provincia" ? value.provincia : value.distrito;
+					$('.drop-' + llenar).append('<li class="drop-item" data-id="' + (llenar == 'provincia' ? field : value.idUbigeo) + '">' + field + '</li>');
+				});
+				dropdown();
+				
+				console.log(llenar);
+				if(llenar == 'provincia'){
+					$('.drop-provincia li').click(function(ev){
+						var obj = {ciudad: $('.drop-ciudad').siblings('.drop-button').val(), provincia: $(ev.target).text()};
+						$('.drop-distrito').html('');
+						$('.drop-distrito').siblings('.drop-button').html('');
+						$('.drop-distrito').siblings('input:hidden').html('');
+						$('.drop-distrito').parent('.drop').removeClass('focused');
+						console.log('ajax');
+						callAjax(obj, 'distrito');
+					});
+				}
+			},
+			error: function(err){
+				console.log('Error al obtener ubigeo: ' + err);
+			}
+		})
+	}
 }
 
 

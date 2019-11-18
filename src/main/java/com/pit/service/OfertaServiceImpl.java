@@ -20,8 +20,8 @@ public class OfertaServiceImpl implements OfertaService {
 	}
 
 	@Override
-	public List<Oferta> listaOfertas(int idUsuario, int idOferta) {
-		return ofertaDao.listaOfertas(idUsuario, idOferta);
+	public List<Oferta> listaOfertas(int idUsuario, int idOferta, int idEspecialidad, double menorPrecio, double mayorPrecio) {
+		return ofertaDao.listaOfertas(idUsuario, idOferta, idEspecialidad, menorPrecio, mayorPrecio);
 	}
 	
 }
