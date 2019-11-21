@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.pit.model.BResult;
 import com.pit.model.Especialidad;
 import com.pit.model.Oferta;
+import com.pit.model.Ubigeo;
 import com.pit.model.Usuario;
 import com.pit.service.OfertaService;
 import com.pit.service.UsuarioService;
@@ -42,11 +43,13 @@ public class AuthenticationController {
 		if(logued != null) {
 			List<Especialidad> listaEspecialidades = usuarioService.listaEspecialidades();
 			List<Oferta> listaOfertas = ofertaService.listaOfertas(logued.getIdUsuario(), 0, 0, 0, 0);
+			List<Ubigeo> listaUbigeo = usuarioService.listaUbigeo(null, null, null); 
 			
 			model.addAttribute("logued", true);
 			model.addAttribute("usuario", logued);
 			model.addAttribute("especialidades", listaEspecialidades);
 			model.addAttribute("ofertas", listaOfertas);
+			model.addAttribute("ciudades", listaUbigeo);
 		}
 		else {
 			return "redirect:/";
@@ -124,6 +127,14 @@ public class AuthenticationController {
 	public BResult obtenerUsuario(@RequestParam(name="idLogin") String idLogin) {
 		BResult bResult = new BResult();
 		bResult.setResult(usuarioService.obtenerUsuario(idLogin));
+		return bResult;
+	}
+	
+	@RequestMapping(value="usuario/ubigeo", method=RequestMethod.GET)
+	@ResponseBody
+	public BResult obtenerUbigeo(@RequestParam(required=false) String ciudad, @RequestParam(required=false) String provincia, @RequestParam(required=false) String distrito) {
+		BResult bResult = new BResult();
+		bResult.setResult(usuarioService.listaUbigeo(ciudad, provincia, distrito));
 		return bResult;
 	}
 	

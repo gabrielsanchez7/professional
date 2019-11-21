@@ -3,7 +3,7 @@
 <jsp:include page="../layouts/header.jsp"/>
 
 <div id="config-account-page">
-	<a class="omit" href="#">Omitir</a>
+	<a class="omit" href="${pageContext.request.contextPath}/home">Omitir</a>
 	<h1>Configuraci&oacute;n de cuenta</h1>
 	<div class="content-forms">
 		<ul class="config-menu">
@@ -59,6 +59,33 @@
 							<input value="${usuario.celular}" type="text" id="phone" autocomplete="off" data-validate="false" data-message="Ingrese un n&uacute;mero de celular v&aacute;lido" data-type="phone"/>
 							<span class="placeholder">Nro. de celular</span>
 							<i class="fas fa-mobile-alt"></i>
+						</label>
+					</div>
+					<div class="three-group-label">
+						<label class="drop">
+							<input value="${usuario.ubigeo.ciudad}" class="drop-button" type="text" readonly autocomplete="off" data-validate="false" data-message="Seleccione una opci&oacute;n" data-type="option"/>
+							<input type="hidden" id="ciudad"/>
+							<span class="placeholder">Ciudad</span>
+							<i class="fas fa-sort-down"></i>
+							<ul class="drop-list drop-ciudad">
+								<c:forEach items="${ciudades}" var="ubigeo">
+									<li class="drop-item" data-id="${ubigeo.ciudad}">${ubigeo.ciudad}</li>
+								</c:forEach>
+							</ul>
+						</label>
+						<label class="drop">
+							<input value="${usuario.ubigeo.provincia}" class="drop-button" type="text" readonly autocomplete="off" data-validate="false" data-message="Seleccione una opci&oacute;n" data-type="option"/>
+							<input type="hidden" id="provincia"/>
+							<span class="placeholder">Provincia</span>
+							<i class="fas fa-sort-down"></i>
+							<ul class="drop-list drop-provincia"></ul>
+						</label>
+						<label class="drop">
+							<input value="${usuario.ubigeo.distrito}" class="drop-button" type="text" readonly autocomplete="off" data-validate="false" data-message="Seleccione una opci&oacute;n" data-type="option"/>
+							<input type="hidden" id="distrito" value="${usuario.ubigeo.idUbigeo}"/>
+							<span class="placeholder">Distrito</span>
+							<i class="fas fa-sort-down"></i>
+							<ul class="drop-list drop-distrito"></ul>
 						</label>
 					</div>
 					<label>

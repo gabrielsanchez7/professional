@@ -830,8 +830,124 @@ header  {
 	}
 }
 
+#detalle-oferta {
+	.head-detalle {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 30px 0;
+		background-color: $borderGray;
+		margin-bottom: 40px;
+		.initials {
+			display: block;
+			line-height: 120px;
+			width: 120px;
+			border-radius: 60px;
+			font-weight: 700;
+			font-size: 46px;
+			text-align: center;
+			border: 1px solid $primaryColor;
+			color: $primaryColor;
+		}
+		p {
+			margin-left: 20px;
+			span {
+				display: block;
+				&:first-child { color: $placeholder; }
+				&:last-child {
+					font-size: 20px;
+					font-weight: 500;
+				}
+			}
+		}
+	}
+	.body-detalle {
+		max-width: 1200px;
+		width: 100%;
+		margin: auto;
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		.desc {
+			width: 40%;
+			margin-right: 100px;
+			span {
+				font-size: 14px;
+				margin-bottom: 4px;
+				color: $placeholder;
+				display: block;
+			}
+			p { margin-bottom: 30px; }
+		}
+		.reserva {
+			width: 60%;
+			p {
+				font-size: 14px;
+				margin-bottom: 4px;
+				color: $placeholder;
+				display: block;
+			}
+			select {
+				display: block;
+				height: 50px;
+				-webkit-appearance: none;
+				width: 100%;
+				border: 1px solid $borderGray;
+				padding: 0 15px;
+				margin-top: 10px;
+				outline: none;
+				margin-bottom: 15px;
+			}
+			input[type="text"], input[type="number"], input[type="date"] {
+				display: block;
+				line-height: 48px;
+				border: 1px solid $borderGray;
+				border-radius: 5px;
+				width: 100%;
+				padding: 0 15px;
+				-webkit-appearance: none;
+				outline: none;
+				margin-bottom: 15px;
+				margin-top: 10px;
+			}
+			.cont-button {
+				display: flex;
+				align-items: center;
+				justify-content: flex-end;
+				margin-top: 30px;
+				button {
+					display: block;
+					line-height: 48px;
+					border-radius: 5px;
+					background-color: $primaryColor;
+					color: #fff;
+					width: 150px;
+					border: none;
+					-webkit-appearance: none;
+				}
+			}
+		}
+	}
+}
 
-
+#reservas-page {
+	width: 100%;
+	max-width: 1200px;
+	margin: auto;
+	padding: 60px 0 150px 0;
+	h1 {
+		font-size: 24px;
+		font-weight: 700;
+		margin-bottom: 30px;
+	}
+	section {
+		article {
+			border-bottom: 1px solid $borderGray;
+			padding-bottom: 30px;
+			margin-bottom: 30px;
+		}
+	}
+}
 
 
 

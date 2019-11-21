@@ -14,7 +14,7 @@ public class Ubigeo implements Serializable {
 
 	@Id
 	@Column(name="id_ubigeo")
-	private int idubigeo;
+	private int idUbigeo;
 	
 	@Column
 	private String distrito;
@@ -28,12 +28,12 @@ public class Ubigeo implements Serializable {
 	@Column
 	private String pais;
 
-	public int getIdubigeo() {
-		return idubigeo;
+	public int getIdUbigeo() {
+		return idUbigeo;
 	}
 
-	public void setIdubigeo(int idubigeo) {
-		this.idubigeo = idubigeo;
+	public void setIdUbigeo(int idUbigeo) {
+		this.idUbigeo = idUbigeo;
 	}
 
 	public String getDistrito() {

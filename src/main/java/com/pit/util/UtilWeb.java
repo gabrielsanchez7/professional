@@ -18,4 +18,8 @@ public class UtilWeb {
 		else return null;
 	}
 	
+	public static String userInitials(Usuario usuario) {
+		return String.valueOf(usuario.getNombre().charAt(0)) + String.valueOf(usuario.getApellidos().charAt(0));
+	}
+	
 }

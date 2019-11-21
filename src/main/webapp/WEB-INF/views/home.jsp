@@ -37,6 +37,7 @@
 						<div class="proff">
 							<span class="label">Profesional</span>
 							<p class="name">${oferta.usuario.nombre} ${oferta.usuario.apellidos}</p>
+							<p class="label">Especialidad: ${oferta.especialidad.descripcion}</p>
 						</div>
 					</div>
 					<p class="desc">${oferta.descripcion}</p>
@@ -45,7 +46,7 @@
 							<span class="label">Precio por hora</span>
 							<p class="precio">S/ ${oferta.precioHora}</p>
 						</div>
-						<button class="btn btn-on">Ver detalle</button>
+						<a href="${pageContext.request.contextPath}/oferta/${oferta.idOferta}" class="btn btn-on">Ver detalle</a>
 					</div>
 				</article>
 			</c:forEach>

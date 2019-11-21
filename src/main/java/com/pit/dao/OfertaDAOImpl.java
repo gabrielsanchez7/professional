@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.pit.model.Especialidad;
 import com.pit.model.Oferta;
+import com.pit.model.Ubigeo;
 import com.pit.model.Usuario;
 
 @Repository
@@ -80,12 +81,20 @@ public class OfertaDAOImpl implements OfertaDAO {
 				usuario.setCelular((String)obj[7]);
 				usuario.setCalificacion((int)obj[8]);
 				usuario.setPresentacion((String)obj[9]);
-				oferta.setUsuario(usuario);
 				
 				Especialidad especialidad = new Especialidad();
 				especialidad.setIdEspecialidad((int)obj[10]);
 				especialidad.setDescripcion((String)obj[11]);
 				oferta.setEspecialidad(especialidad);
+				
+				Ubigeo ubigeo = new Ubigeo();
+				ubigeo.setIdUbigeo((int)obj[12]);
+				ubigeo.setCiudad((String)obj[13]);
+				ubigeo.setProvincia((String)obj[14]);
+				ubigeo.setDistrito((String)obj[15]);
+				
+				usuario.setUbigeo(ubigeo);
+				oferta.setUsuario(usuario);
 				
 				listaOfertas.add(oferta);
 			}
