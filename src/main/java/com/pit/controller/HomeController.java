@@ -74,6 +74,15 @@ public class HomeController {
 		return "reservas";
 	}
 	
+	@RequestMapping(value="reservas/listar", method=RequestMethod.GET)
+	@ResponseBody
+	public BResult listarReservas(@RequestParam int idUsuario) {
+		List<Reserva> listaReservas = usuarioService.listaReservas(idUsuario, "cliente");
+		BResult bResult = new BResult();
+		bResult.setResult(listaReservas);
+		return bResult;
+	}
+	
 	@RequestMapping(value="oferta/reserva", method=RequestMethod.POST)
 	@ResponseBody
 	public BResult autenticarUsuario(@RequestBody Reserva reserva, HttpServletRequest request) {

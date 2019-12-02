@@ -20,7 +20,7 @@
 		
 <!-- 	</div> -->
 	
- 	<div id="logreg">
+ 	<!-- <div id="logreg">
 		<h2>Ingresar</h2>
 		<a class="social" id="facebook" href="#"><i class="fab fa-facebook-f"></i><span>Ingresar</span> con Facebook</a>
 
@@ -29,9 +29,9 @@
 				<span class="icon fab fa-google"></span><span class="buttonText"><span class="change">Ingresar</span> con Google</span>
 			</div>
 		</div>
-	</div>
+	</div> -->
 	
-	<!-- <div class="register form">
+	<div class="register form">
 		<p class="link">&iquest;Ya tienes una cuenta? <a href="javascript:void(0)" class="linkup" data-link="login">Ingresa desde aqu&iacute;</a></p>
 		<label>
 			<input type="text" id="name" autocomplete="off" data-validate="false" data-message="Ingrese un nombre v&aacute;lido" data-type="name"/>
@@ -71,7 +71,7 @@
 		</label>
 		
 		<button id="loginForm" type="submit">Ingresar</button>
-	</div> -->
+	</div>
 </div>
 
 <script type="text/javascript">
