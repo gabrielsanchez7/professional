@@ -10,6 +10,8 @@ $shadow2: 0 1px 16px 1px rgba(0, 0, 0, 0.15);
 $placeholder: #a9a9a9;
 $errorColor: #b51d1d;
 
+.sc-fMiknA { color: $textColor !important; }
+
 * {
     margin: 0;
     padding: 0;
@@ -215,6 +217,15 @@ header  {
     border-bottom: 1px solid $borderGray;
     padding: 15px;
     .auth {
+    	display: flex;
+    	align-items: center;
+    	justify-content: space-between;
+    	a {
+    		text-decoration: none;
+    		font-size: 14px;
+    		color: $textGray;
+    		margin-right: 30px;
+    	}
     	.initials {
     		display: block;
     		line-height: 48px;
@@ -353,15 +364,14 @@ header  {
         }
     }
     #logreg {
-    	display: none;
     	h2 {
     		font-size: 17px;
             margin-bottom: 20px;
             text-align: center;
     	}
     }
+    .login { display: none; }
     .register, .login {
-        display: none;
         width: 380px;
         .link {
             font-size: 12px;
@@ -370,11 +380,12 @@ header  {
             a {
                 color: $primaryColor;
                 text-decoration: none;
+                font-size: 12px;
             }
 		}
         button {
             display: block;
-            line-height: 36px;
+            line-height: 46px;
             color: $primaryColor;
             width: 100%;
             border: 1px solid $primaryColor;
@@ -383,7 +394,8 @@ header  {
             transition: $fast;
             cursor: pointer;
             outline: none;
-            appearance: none;
+            -webkit-appearance: none;
+            background-color: transparent;
             &:hover {
                 background-color: $primaryColor;
                 color: #fff;
@@ -673,6 +685,8 @@ header  {
 								border: none;
 								cursor: pointer;
 								outline: none;
+								background-color: transparent;
+								color: $primaryColor;
 								* { pointer-events: none; }
 								&#editar-oferta { margin-right: 15px; }
 								i { color: $primaryColor; }

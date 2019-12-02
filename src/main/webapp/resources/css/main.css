@@ -1,3 +1,7 @@
+.sc-fMiknA {
+  color: #484848 !important;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -225,6 +229,17 @@ header {
   border-bottom: 1px solid #e4e4e4;
   padding: 15px;
 }
+header .auth {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+header .auth a {
+  text-decoration: none;
+  font-size: 14px;
+  color: #a0a0a0;
+  margin-right: 30px;
+}
 header .auth .initials {
   display: block;
   line-height: 48px;
@@ -365,16 +380,15 @@ header .auth .initials:hover {
   font-weight: 500;
   text-decoration: none;
 }
-#choosePage #logreg {
-  display: none;
-}
 #choosePage #logreg h2 {
   font-size: 17px;
   margin-bottom: 20px;
   text-align: center;
 }
-#choosePage .register, #choosePage .login {
+#choosePage .login {
   display: none;
+}
+#choosePage .register, #choosePage .login {
   width: 380px;
 }
 #choosePage .register .link, #choosePage .login .link {
@@ -385,10 +399,11 @@ header .auth .initials:hover {
 #choosePage .register .link a, #choosePage .login .link a {
   color: #08767d;
   text-decoration: none;
+  font-size: 12px;
 }
 #choosePage .register button, #choosePage .login button {
   display: block;
-  line-height: 36px;
+  line-height: 46px;
   color: #08767d;
   width: 100%;
   border: 1px solid #08767d;
@@ -397,7 +412,8 @@ header .auth .initials:hover {
   transition: 0.15s;
   cursor: pointer;
   outline: none;
-  appearance: none;
+  -webkit-appearance: none;
+  background-color: transparent;
 }
 #choosePage .register button:hover, #choosePage .login button:hover {
   background-color: #08767d;
@@ -728,6 +744,8 @@ header .auth .initials:hover {
   border: none;
   cursor: pointer;
   outline: none;
+  background-color: transparent;
+  color: #08767d;
 }
 #config-account-page .content-forms .form #lista-ofertas .oferta .options .buttons button * {
   pointer-events: none;
