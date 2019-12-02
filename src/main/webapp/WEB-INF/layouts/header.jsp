@@ -48,6 +48,7 @@
 		<div class="auth">
 			<a href="${pageContext.request.contextPath}/home">Inicio</a>
 			<a href="${pageContext.request.contextPath}/reservas">Mis reservas</a>
+			<a href="${pageContext.request.contextPath}/usuario/config">Mi cuenta</a>
 			<a href="${pageContext.request.contextPath}/usuario/cerrar-sesion">Cerrar sesi&oacute;n</a>
 			<div class="initials"></div>
 		</div>
