@@ -7,6 +7,7 @@ Authentication.prototype.init = function(){
 	this.link();
 	this.submitForms();
 	this.googleLogin();
+	this.authenticate();
 }
 
 Authentication.prototype.handler = function(){
@@ -149,6 +150,56 @@ Authentication.prototype.submitForms = function(){
 	
 }
 
+Authentication.prototype.authenticate = function(){
+	$('#registroForm').click(function(){
+		var obj = {
+			nombre: $('#name').val(),
+			apellidos: $('#surname').val(),
+			email: $('#email').val(),
+			contrasena: $('#password').val(),
+			tipoLogin: 'normal'
+		};
+		
+		$.ajax({
+			url: contextPath + "/usuario/registro",
+			data: JSON.stringify(obj),
+			contentType: "application/json; charset=utf-8",
+			type: 'POST',
+			dataType: 'json',
+			success: function(data){
+				sessionStorage.setItem('userLogued', JSON.stringify(data.result));
+				location.href = contextPath + "/usuario/config";
+			},
+			error: function(err){
+				console.log('Error en registro: ' + err);
+			}
+		});
+	});
+	
+	$('#loginForm').click(function(){
+		var obj = {
+			email: $('#logEmail').val(),
+			contrasena: $('#logPassword').val()
+		};
+		
+		$.ajax({
+			url: contextPath + "/usuario/login",
+			data: obj,
+			contentType: "application/json; charset=utf-8",
+			type: 'GET',
+			dataType: 'json',
+			success: function(data){
+				console.log('Success> ', data);
+				sessionStorage.setItem('userLogued', JSON.stringify(data.result));
+				location.href = contextPath + "/usuario/config";
+			},
+			error: function(err){
+				console.log('Error en logueo: ' + err);
+			}
+		});
+	});
+}
+
 function ConfigUser() {
 	
 }
@@ -160,6 +211,7 @@ ConfigUser.prototype.init = function(){
 	this.nuevaOferta();
 	this.editarOferta();
 	this.elegirUbigeo();
+	this.atenderReserva();
 }
 
 ConfigUser.prototype.handler = function(){
@@ -341,6 +393,27 @@ ConfigUser.prototype.elegirUbigeo = function(){
 			}
 		})
 	}
+}
+
+ConfigUser.prototype.atenderReserva = function(){
+	$('body').on('click', '.atender-oferta', function(ev){
+		var t = $(ev.target);
+		var code = t.attr('data-id');
+		var obj = {idReserva: code};
+		$.ajax({
+			url: contextPath + "/reserva/atender",
+			data: obj,
+			contentType: "application/json; charset=utf-8",
+			type: 'GET',
+			dataType: 'json',
+			success: function(data){
+				location.reload();
+			},
+			error: function(err){
+				console.log('Error al atender la reserva: ' + err);
+			}
+		})
+	});
 }
 
 

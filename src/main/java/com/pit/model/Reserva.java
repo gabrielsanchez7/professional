@@ -34,6 +34,15 @@ public class Reserva implements Serializable {
 	
 	@Column
 	private Date fecha;
+	
+	@Column(name="cantidad_horas")
+	private int cantidadHoras;
+	
+	@Column
+	private String hora;
+	
+	@Column
+	private String atendido;
 
 	public int getIdReserva() {
 		return idReserva;
@@ -81,6 +90,30 @@ public class Reserva implements Serializable {
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}
+
+	public int getCantidadHoras() {
+		return cantidadHoras;
+	}
+
+	public void setCantidadHoras(int cantidadHoras) {
+		this.cantidadHoras = cantidadHoras;
+	}
+
+	public String getHora() {
+		return hora;
+	}
+
+	public void setHora(String hora) {
+		this.hora = hora;
+	}
+
+	public String getAtendido() {
+		return atendido;
+	}
+
+	public void setAtendido(String atendido) {
+		this.atendido = atendido;
 	}
 
 }

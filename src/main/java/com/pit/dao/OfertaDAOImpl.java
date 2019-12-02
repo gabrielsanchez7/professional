@@ -106,4 +106,22 @@ public class OfertaDAOImpl implements OfertaDAO {
 		return listaOfertas;
 	}
 
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Object[]> listaHorariosOcupados(int idOferta, String fecha) {
+		List<Object[]> list = new ArrayList<>();
+		try {
+			StoredProcedureQuery proc = entityManager.createStoredProcedureQuery("sp_obtener_horarios_ocupados");
+			proc.registerStoredProcedureParameter("var_id_oferta", int.class, ParameterMode.IN);
+			proc.registerStoredProcedureParameter("var_fecha", String.class, ParameterMode.IN);
+			proc.setParameter("var_id_oferta", idOferta);
+			proc.setParameter("var_fecha", fecha);
+			list = proc.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
 }

@@ -60,10 +60,8 @@ public class HomeController {
 		HttpSession session = request.getSession();
 		Usuario usuario = (Usuario)session.getAttribute("userLogued");
 		Oferta oferta = ofertaService.listaOfertas(0, idOferta, 0, 0, 0).get(0);
-		List<Reserva> listaReservas = usuarioService.listaReservas(usuario.getIdUsuario());
 		model.addAttribute("oferta", oferta);
 		model.addAttribute("initials", UtilWeb.userInitials(oferta.getUsuario()));
-		model.addAttribute("reservas", listaReservas);
 		return "detalle-oferta";
 	}
 	
@@ -71,7 +69,7 @@ public class HomeController {
 	public String reservas(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Usuario usuario = (Usuario)session.getAttribute("userLogued");
-		List<Reserva> listaReservas = usuarioService.listaReservas(usuario.getIdUsuario());
+		List<Reserva> listaReservas = usuarioService.listaReservas(usuario.getIdUsuario(), "cliente");
 		model.addAttribute("reservas", listaReservas);
 		return "reservas";
 	}
@@ -82,7 +80,9 @@ public class HomeController {
 		BResult bResult = new BResult();
 		HttpSession session = request.getSession();
 		Usuario logued = (Usuario)session.getAttribute("userLogued");
-		reserva.setUsuario(logued);
+		if(logued != null) {
+			reserva.setUsuario(logued);
+		}
 		
 		try {
 			int auth = usuarioService.registrarReserva(reserva);

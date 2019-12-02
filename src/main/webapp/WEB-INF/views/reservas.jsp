@@ -12,6 +12,7 @@
 				<p>Reserva para el: ${reserva.fecha}</p>
 				<p>Direccion: ${reserva.direccion}</p>
 				<p>Precio final: S/ ${reserva.precio}</p>
+				<p>Atendido: ${reserva.atendido}</p>
 			</article>
 		</c:forEach>
 	</section>

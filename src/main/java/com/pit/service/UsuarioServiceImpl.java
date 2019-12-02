@@ -48,8 +48,18 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public List<Reserva> listaReservas(int idUsuario) {
-		return usuarioDAO.listaReservas(idUsuario);
+	public List<Reserva> listaReservas(int idUsuario, String tipo) {
+		return usuarioDAO.listaReservas(idUsuario, tipo);
+	}
+
+	@Override
+	public Usuario loginUsuario(String email, String contrasena) {
+		return usuarioDAO.loginUsuario(email, contrasena);
+	}
+
+	@Override
+	public String atenderReserva(int idReserva) {
+		return usuarioDAO.atenderReserva(idReserva);
 	}
 
 }

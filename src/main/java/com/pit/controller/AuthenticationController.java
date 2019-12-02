@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.pit.model.BResult;
 import com.pit.model.Especialidad;
 import com.pit.model.Oferta;
+import com.pit.model.Reserva;
 import com.pit.model.Ubigeo;
 import com.pit.model.Usuario;
 import com.pit.service.OfertaService;
@@ -43,19 +44,21 @@ public class AuthenticationController {
 		if(logued != null) {
 			List<Especialidad> listaEspecialidades = usuarioService.listaEspecialidades();
 			List<Oferta> listaOfertas = ofertaService.listaOfertas(logued.getIdUsuario(), 0, 0, 0, 0);
-			List<Ubigeo> listaUbigeo = usuarioService.listaUbigeo(null, null, null); 
+			List<Ubigeo> listaUbigeo = usuarioService.listaUbigeo(null, null, null);
+			List<Reserva> listaReservas = usuarioService.listaReservas(logued.getIdUsuario(), "profesional");
 			
 			model.addAttribute("logued", true);
 			model.addAttribute("usuario", logued);
 			model.addAttribute("especialidades", listaEspecialidades);
 			model.addAttribute("ofertas", listaOfertas);
 			model.addAttribute("ciudades", listaUbigeo);
+			model.addAttribute("contratos", listaReservas);
 		}
 		else {
 			return "redirect:/";
 		}
-		
 		return "config-account";
+		
 	}
 	
 	@RequestMapping(value="usuario/registro", method=RequestMethod.POST)
@@ -64,6 +67,9 @@ public class AuthenticationController {
 		BResult bResult = new BResult();
 		
 		try {
+			Ubigeo ubigeo = new Ubigeo();
+			ubigeo.setIdUbigeo(0);
+			usuario.setUbigeo(ubigeo);
 			String auth = usuarioService.registrarUsuario(usuario);
 			if(auth.equals(usuario.getIdLogin())) {
 				usuario = usuarioService.obtenerUsuario(usuario.getIdLogin());
@@ -135,6 +141,50 @@ public class AuthenticationController {
 	public BResult obtenerUbigeo(@RequestParam(required=false) String ciudad, @RequestParam(required=false) String provincia, @RequestParam(required=false) String distrito) {
 		BResult bResult = new BResult();
 		bResult.setResult(usuarioService.listaUbigeo(ciudad, provincia, distrito));
+		return bResult;
+	}
+	
+	@RequestMapping(value="usuario/cerrar-sesion", method=RequestMethod.GET)
+	public String cerrarSesion(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.removeAttribute("userLogued");
+		return "redirect:/";
+	}
+	
+	@RequestMapping(value="usuario/login", method=RequestMethod.GET)
+	@ResponseBody
+	public BResult loginUsuario(@RequestParam String email, @RequestParam String contrasena, HttpServletRequest request) {
+		BResult bResult = new BResult();
+		Usuario usuario = usuarioService.loginUsuario(email, contrasena);
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("userLogued", usuario);
+		bResult.setResult(usuario);
+		return bResult;
+	}
+	
+	@RequestMapping(value="reserva/atender", method=RequestMethod.GET)
+	@ResponseBody
+	public BResult atenderReserva(@RequestParam String idReserva) {
+		BResult bResult = new BResult();
+		
+		try {
+			String update = usuarioService.atenderReserva(Integer.parseInt(idReserva));
+			if(update.equals("success")) {
+				bResult.setMensaje("Reserva atendida correctamente.");
+				bResult.setCodigo(200);
+			}
+			else {
+				bResult.setMensaje("No se ha podido atender la reserva.");
+				bResult.setCodigo(404);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			bResult.setCodigo(500);
+			bResult.setMensaje("Hubo un error al atender la reserva");
+		}
+		
 		return bResult;
 	}
 	

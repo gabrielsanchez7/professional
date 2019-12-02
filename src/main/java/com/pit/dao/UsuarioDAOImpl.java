@@ -34,6 +34,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			proc.registerStoredProcedureParameter("var_nombre", String.class, ParameterMode.IN);
 			proc.registerStoredProcedureParameter("var_apellidos", String.class, ParameterMode.IN);
 			proc.registerStoredProcedureParameter("var_email", String.class, ParameterMode.IN);
+			proc.registerStoredProcedureParameter("var_contrasena", String.class, ParameterMode.IN);
 			proc.registerStoredProcedureParameter("var_avatar", String.class, ParameterMode.IN);
 			proc.registerStoredProcedureParameter("var_tipo_login", String.class, ParameterMode.IN);
 			
@@ -41,6 +42,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			proc.setParameter("var_nombre", usuario.getNombre());
 			proc.setParameter("var_apellidos", usuario.getApellidos());
 			proc.setParameter("var_email", usuario.getEmail());
+			proc.setParameter("var_contrasena", usuario.getContrasena());
 			proc.setParameter("var_avatar", usuario.getAvatar());
 			proc.setParameter("var_tipo_login", usuario.getTipoLogin());
 			
@@ -218,6 +220,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			proc.registerStoredProcedureParameter("var_precio", Double.class, ParameterMode.IN);
 			proc.registerStoredProcedureParameter("var_direccion", String.class, ParameterMode.IN);
 			proc.registerStoredProcedureParameter("var_fecha", Date.class, ParameterMode.IN);
+			proc.registerStoredProcedureParameter("var_hora", String.class, ParameterMode.IN);
+			proc.registerStoredProcedureParameter("var_cantidad_horas", int.class, ParameterMode.IN);
 			
 			proc.setParameter("var_id_reserva", reserva.getIdReserva());
 			proc.setParameter("var_id_usuario", reserva.getUsuario().getIdUsuario());
@@ -225,6 +229,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			proc.setParameter("var_precio", reserva.getPrecio());
 			proc.setParameter("var_direccion", reserva.getDireccion());
 			proc.setParameter("var_fecha", reserva.getFecha());
+			proc.setParameter("var_hora", reserva.getHora());
+			proc.setParameter("var_cantidad_horas", reserva.getCantidadHoras());
 			
 			proc.execute();
 			
@@ -239,12 +245,15 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Reserva> listaReservas(int idUsuario) {
+	public List<Reserva> listaReservas(int idUsuario, String tipo) {
 		List<Reserva> listaReservas = new ArrayList<>();
 		try {
 			StoredProcedureQuery proc = entityManager.createStoredProcedureQuery("sp_obtener_reservas");
 			proc.registerStoredProcedureParameter("var_id_usuario", int.class, ParameterMode.IN);
+			proc.registerStoredProcedureParameter("var_tipo", String.class, ParameterMode.IN);
+			
 			proc.setParameter("var_id_usuario", idUsuario);
+			proc.setParameter("var_tipo", tipo);
 			List<Object[]> lista = proc.getResultList();
 			for(Object[] obj : lista) {
 				Reserva reserva = new Reserva();
@@ -263,6 +272,9 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 				reserva.setPrecio((double)obj[5]);
 				reserva.setDireccion((String)obj[6]);
 				reserva.setFecha((Date)obj[7]);
+				reserva.setHora((String)obj[8]);
+				reserva.setCantidadHoras(obj[9] == null ? 0 : (int)obj[9]);
+				reserva.setAtendido((String)obj[10]);
 				
 				listaReservas.add(reserva);
 			}
@@ -270,6 +282,72 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			e.printStackTrace();
 		}
 		return listaReservas;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Usuario loginUsuario(String email, String contrasena) {
+		Usuario usuario = null;
+		
+		try {
+			StoredProcedureQuery proc = entityManager.createStoredProcedureQuery("sp_login_usuario");
+			proc.registerStoredProcedureParameter("var_email", String.class, ParameterMode.IN);
+			proc.registerStoredProcedureParameter("var_contrasena", String.class, ParameterMode.IN);
+			
+			proc.setParameter("var_email", email);
+			proc.setParameter("var_contrasena", contrasena);
+			
+			List<Object[]> lista = proc.getResultList();
+			for(Object[] obj : lista) {
+				usuario = new Usuario();
+				usuario.setIdUsuario((int)obj[0]);
+				usuario.setIdLogin((String)obj[1]);
+				usuario.setNombre((String)obj[2]);
+				usuario.setApellidos((String)obj[3]);
+				usuario.setEmail((String)obj[4]);
+				usuario.setContrasena((String)obj[5]);
+				usuario.setFechaNacimiento((Date)obj[6]);
+				usuario.setAvatar((String)obj[7]);
+				usuario.setCelular((String)obj[8]);
+				usuario.setCalificacion(obj[9] == null ? 0 : (int)obj[9]);
+				usuario.setPresentacion((String)obj[10]);
+				usuario.setTipoLogin((String)obj[11]);
+				usuario.setFechaRegistro((Date)obj[12]);
+				
+				Ubigeo ubigeo = new Ubigeo();
+				ubigeo.setIdUbigeo(obj[13] == null ? 0 : (int)obj[13]);
+				ubigeo.setCiudad((String)obj[14]);
+				ubigeo.setProvincia((String)obj[15]);
+				ubigeo.setDistrito((String)obj[16]);
+				usuario.setUbigeo(ubigeo);
+				
+				usuario.setRol((String)obj[17]);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return usuario;
+	}
+
+	@Override
+	public String atenderReserva(int idReserva) {
+		String result = null;
+		
+		try {
+			StoredProcedureQuery proc = entityManager.createStoredProcedureQuery("sp_atender_reserva");
+			proc.registerStoredProcedureParameter("var_id_reserva", int.class, ParameterMode.IN);
+			proc.setParameter("var_id_reserva", idReserva);
+			
+			proc.execute();
+			result = (String)proc.getSingleResult();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 	
 }

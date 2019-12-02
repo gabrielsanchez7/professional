@@ -66,5 +66,23 @@ public class OfertaController {
 		
 		return bResult;
 	}
+	
+	@RequestMapping(value="/listar-horarios", method=RequestMethod.GET)
+	@ResponseBody
+	public BResult listaOfertas(@RequestParam int idOferta, @RequestParam String fecha) {
+		BResult bResult = new BResult();
+		
+		try {
+			List<Object[]> listaHorarios = ofertaService.listaHorariosOcupados(idOferta, fecha);
+			bResult.setCodigo(200);
+			bResult.setResult(listaHorarios);
+		} catch (Exception e) {
+			e.printStackTrace();
+			bResult.setCodigo(500);
+			bResult.setMensaje("Hubo un error al obtener los horarios");
+		}
+		
+		return bResult;
+	}
 
 }

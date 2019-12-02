@@ -22,7 +22,7 @@
 			<p>Escoge el d&iacute;a para la reserva:</p>
 			<input type="date" id="fecha" placeholder="Fecha"/>
 			<p>Escoge la hora en que deseas reservar:</p>
-			<select>
+			<select id="cboFecha">
 				<option>07:00 am</option>
 				<option>08:00 am</option>
 				<option>09:00 am</option>
@@ -56,12 +56,57 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
+		$('#fecha').datepicker({
+			autoHide: true,
+			language: 'es-ES',
+			format: 'yyyy-MM-dd',
+			months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Setiembre', 'Octobre', 'Noviembre', 'Diciembre'],
+	        daysMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+	        pick: function(ev){
+	        	$('#cboFecha option').removeAttr('disabled');
+		        setTimeout(function(){
+			        var obj = {idOferta: '${oferta.idOferta}', fecha: $('#fecha').val()};
+		        	$.ajax({
+						url: 'listar-horarios',
+						type: 'GET',
+						dataType: 'json',
+						contentType: "application/json; charset=utf-8",
+						data: obj,
+						success: function(data){
+							var disabled = [];
+							$.each(data.result, function(index, value) {
+								if(value != null){
+									$.each($('#cboFecha option'), function(i, v) {
+										var cont = $(v).val();
+										if(cont == value[0]) {
+											for(var j = 1; j <= value[1]; j++) {
+												disabled.push(i++);
+											}
+										}
+									});
+								}
+							});
+
+							$.each(disabled, function(index, value){
+								$('#cboFecha option').eq(value).attr({disabled: true});
+							});
+						},
+						error: function(){
+							console.log(error);
+						}
+					});
+		        });
+	        }
+		});
+		
 		$('#reservar').click(function(){
 			var obj = {
 				oferta: { idOferta: '${oferta.idOferta}' },
 				precio: parseInt('${oferta.precioHora}') * parseInt($('#horas').val()),
 				direccion: $('#direccion').val(),
-				fecha: $('#fecha').val()
+				fecha: $('#fecha').val(),
+				hora: $('#cboFecha').val(),
+				cantidadHoras: $('#horas').val()
 			};
 			console.log('Reservar ::: ', obj);
 			$.ajax({

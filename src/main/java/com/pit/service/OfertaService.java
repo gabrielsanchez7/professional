@@ -8,5 +8,6 @@ public interface OfertaService {
 	
 	public int registrarOferta(Oferta oferta);
 	public List<Oferta> listaOfertas(int idUsuario, int idOferta, int idEspecialidad, double menorPrecio, double mayorPrecio);
+	public List<Object[]> listaHorariosOcupados(int idOferta, String fecha);
 
 }

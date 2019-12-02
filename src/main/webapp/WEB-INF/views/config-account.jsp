@@ -18,16 +18,19 @@
 			</c:if>
 			<c:if test="${usuario.rol == 'proff'}">
 				<li class="change-config" data-option="working"><i class="fas fa-briefcase"></i>Mis ofertas de trabajo</li>
+				<li class="change-config" data-option="contract"><i class="fas fa-file-signature"></i>Mis contratos</li>
 			</c:if>
 		</ul>
 		<div class="form active" id="personal-info" data-form="personal">
 			<h2>Informaci&oacute;n general</h2>
 			<div>
 				<div class="avatar">
-					<c:choose>
-						<c:when test="${usuario.avatar}"><img src="${pageContext.request.contextPath}/resources/images/male-icon.png" alt="User avatar"/></c:when>
-						<c:otherwise><img src="${usuario.avatar}" alt="User avatar"/></c:otherwise>
-					</c:choose>
+					<c:if test="${usuario.avatar eq null}">
+						<img src="${pageContext.request.contextPath}/resources/images/male-icon.png" alt="User avatar"/>
+					</c:if>
+					<c:if test="${usuario.avatar ne null}">
+						<img src="${usuario.avatar}" alt="User avatar"/>
+					</c:if>
 					
 					<div class="choose-photo">
 						<span><i class="fas fa-paperclip"></i>Elegir una foto</span>
@@ -194,11 +197,33 @@
 								<p class="descripcion"><span class="label">Descripci&oacute;n:</span>${oferta.descripcion}</p>
 								<p class="especialidad"><span class="label">Especialidad:</span>${oferta.especialidad.descripcion}</p>
 								<p class="precio"><span class="label">Precio:</span>S/ ${oferta.precioHora}</p>
+								
 							</article>
 						</c:forEach>
 					</section>
 				</c:otherwise>
 			</c:choose>
+		</div>
+		<div class="form" id="contract" data-form="contract">
+			<h2>Mis contratos</h2>
+			<section id="lista-ofertas">
+				<c:forEach items="${contratos}" var="contrato">
+					<article class="oferta">
+						<div class="options">
+							<p class="id"><span class="label">C&oacute;digo:</span> ${contrato.idReserva}</p>
+							<div class="buttons">
+								<button class="atender-oferta" type="button" data-id="${contrato.idReserva}">Atender</button>
+							</div>
+						</div>
+						<p class="descripcion"><span class="label">Direcci&oacute;:</span>${contrato.direccion}</p>
+						<p class="descripcion"><span class="label">Horas:</span>${contrato.hora}</p>
+						<p class="descripcion"><span class="label">Cantidad de horas:</span>${contrato.cantidadHoras}</p>
+						<p class="especialidad"><span class="label">Fecha:</span>${contrato.fecha}</p>
+						<p class="especialidad"><span class="label">Cliente:</span>${contrato.usuario.nombre} ${contrato.usuario.apellidos}</p>
+						<p class="precio"><span class="label">Precio:</span>S/ ${contrato.precio}</p>
+					</article>
+				</c:forEach>
+			</section>
 		</div>
 	</div>
 </div>
