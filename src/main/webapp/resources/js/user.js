@@ -267,7 +267,7 @@ ConfigUser.prototype.updateUser = function(){
 	
 	$('#actualizar-rol').click(function(){
 		var obj = {};
-		obj.idLogin = logued.idLogin;
+		obj.idUsuario = logued.idUsuario;
 		obj.rol = "proff";
 		
 		updateRequest(obj);
@@ -416,7 +416,59 @@ ConfigUser.prototype.atenderReserva = function(){
 	});
 }
 
-
+ConfigUser.prototype.editarOferta = function(){
+	var logued = userLogued();
+	var ob = this;
+	$('.editar-oferta').click(function(ev){
+		var t = $(ev.target);
+		var id = t.attr('data-id');
+		
+		var content = t.closest('.oferta');
+		
+		$('#crear-nueva-oferta').hide();
+		$('#editar-oferta').show();
+		$('#editar-oferta').attr('data-id', id)
+		
+		openModal('#modal-nueva-oferta');
+		
+		$('#especialidad').val(content.find('#getEspecialidad').text());
+		$('#drop-especialidad').val(content.find('#getEspecialidad').text());
+		$('#descripcion-oferta').val(content.find('#getDescripcion').text());
+		$('#precio').val(content.find('#getPrecioHora').text());
+		
+		ob.setData();
+		
+	});
+	
+	$('#editar-oferta').click(function(ev){
+		var t = $(ev.target);
+		var id = t.attr('data-id');
+		
+		var obj = { 
+			idOferta: parseInt(id),
+  			usuario: { idUsuario: logued.idUsuario },
+			especialidad: { idEspecialidad: parseInt($('#especialidad').val()) },
+			descripcion: $('#descripcion-oferta').val(),
+			precioHora: $('#precio').val()
+		};
+		
+		console.log(obj);
+		
+		$.ajax({
+			url: contextPath + "/oferta/actualizar",
+			data: JSON.stringify(obj),
+			contentType: "application/json; charset=utf-8",
+			type: 'POST',
+			dataType: 'json',
+			success: function(data){
+				location.reload();
+			},
+			error: function(err){
+				console.log('Error al actualizar la oferta: ' + err);
+			}
+		})
+	});
+}
 
 
 

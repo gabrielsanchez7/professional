@@ -124,4 +124,32 @@ public class OfertaDAOImpl implements OfertaDAO {
 		return list;
 	}
 
+	@Override
+	public String actualizarOferta(Oferta oferta) {
+String result = null;
+		
+		try {
+			StoredProcedureQuery proc = entityManager.createStoredProcedureQuery("sp_actualizar_oferta");
+			proc.registerStoredProcedureParameter("var_id_usuario", int.class, ParameterMode.IN);
+			proc.registerStoredProcedureParameter("var_id_oferta", int.class, ParameterMode.IN);
+			proc.registerStoredProcedureParameter("var_id_especialidad", int.class, ParameterMode.IN);
+			proc.registerStoredProcedureParameter("var_descripcion", String.class, ParameterMode.IN);
+			proc.registerStoredProcedureParameter("var_precio_hora", double.class, ParameterMode.IN);
+			
+			proc.setParameter("var_id_usuario", oferta.getUsuario().getIdUsuario());
+			proc.setParameter("var_id_oferta", oferta.getIdOferta());
+			proc.setParameter("var_id_especialidad", oferta.getEspecialidad().getIdEspecialidad());
+			proc.setParameter("var_descripcion", oferta.getDescripcion());
+			proc.setParameter("var_precio_hora", oferta.getPrecioHora());
+			
+			proc.execute();
+			result = (String)proc.getSingleResult();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
 }

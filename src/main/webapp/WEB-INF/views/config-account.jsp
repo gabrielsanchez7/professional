@@ -194,9 +194,9 @@
 										<button data-id="${oferta.idOferta}" class="eliminar-oferta" type="button"><i class="fas fa-trash"></i></button>
 									</div>
 								</div>
-								<p class="descripcion"><span class="label">Descripci&oacute;n:</span>${oferta.descripcion}</p>
-								<p class="especialidad"><span class="label">Especialidad:</span>${oferta.especialidad.descripcion}</p>
-								<p class="precio"><span class="label">Precio:</span>S/ ${oferta.precioHora}</p>
+								<p class="descripcion"><span class="label">Descripci&oacute;n:</span><span id="getDescripcion">${oferta.descripcion}</span></p>
+								<p class="especialidad"><span class="label">Especialidad:</span><span id="getEspecialidad">${oferta.especialidad.descripcion}</span></p>
+								<p class="precio"><span class="label">Precio:</span>S/ <span id="getPrecioHora">${oferta.precioHora}</span></p>
 								
 							</article>
 						</c:forEach>
@@ -235,7 +235,7 @@
 			<h3>Nueva oferta</h3>
 			<div class="group-label">
 				<label class="drop">
-					<input class="drop-button" type="text" readonly autocomplete="off" data-validate="false" data-message="Seleccione una opci&oacute;n" data-type="option"/>
+					<input class="drop-button" id="drop-especialidad" type="text" readonly autocomplete="off" data-validate="false" data-message="Seleccione una opci&oacute;n" data-type="option"/>
 					<input type="hidden" id="especialidad"/>
 					<span class="placeholder">Especialidad</span>
 					<i class="fas fa-sort-down"></i>
@@ -261,6 +261,7 @@
 		<div class="buttons">
 			<button class="btn btn-off close-modal" type="button">Cancelar</button>
 			<button id="crear-nueva-oferta" class="btn btn-on" type="button">Crear</button>
+			<button id="editar-oferta" class="btn btn-on" type="button" style="display:none;">Editar</button>
 		</div>
 	</div>
 </div>

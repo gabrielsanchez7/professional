@@ -28,5 +28,10 @@ public class OfertaServiceImpl implements OfertaService {
 	public List<Object[]> listaHorariosOcupados(int idOferta, String fecha) {
 		return ofertaDao.listaHorariosOcupados(idOferta, fecha);
 	}
+
+	@Override
+	public String actualizarOferta(Oferta oferta) {
+		return ofertaDao.actualizarOferta(oferta);
+	}
 	
 }

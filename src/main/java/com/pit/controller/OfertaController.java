@@ -84,5 +84,31 @@ public class OfertaController {
 		
 		return bResult;
 	}
+	
+	@RequestMapping(value="actualizar", method=RequestMethod.POST)
+	@ResponseBody
+	public BResult actualizarUsuario(@RequestBody Oferta oferta, HttpServletRequest request) {
+		BResult bResult = new BResult();
+		
+		try {
+			String update = ofertaService.actualizarOferta(oferta);
+			if(update.equals("success")) {
+				bResult.setMensaje("Usuario actualizado correctamente.");
+				bResult.setCodigo(200);
+				bResult.setResult(update);
+			}
+			else {
+				bResult.setMensaje("No se ha podido actualizar el usuario.");
+				bResult.setCodigo(404);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			bResult.setCodigo(500);
+			bResult.setMensaje("Hubo un error al registrar el usuario");
+		}
+		
+		return bResult;
+	}
 
 }
