@@ -29,7 +29,7 @@ CREATE TABLE `tb_oferta` (
   `descripcion` text,
   `precio_hora` double DEFAULT NULL,
   PRIMARY KEY (`id_oferta`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `tb_oferta` (
 
 LOCK TABLES `tb_oferta` WRITE;
 /*!40000 ALTER TABLE `tb_oferta` DISABLE KEYS */;
-INSERT INTO `tb_oferta` VALUES (1,1,3,'Descripción De Albañilería',120),(2,1,2,'Descripción de gasfiteria',200),(4,1,9,'Descripción de multiservicios',150),(5,1,3,'Ut efficitur malesuada magna, in condimentum orci dictum dictum. Nam erat enim, ultrices ac tellus in, pharetra interdum enim. Sed mi tellus, facilisis et bibendum sit amet, fermentum quis ligula. Maecenas facilisis, tellus rhoncus luctus dictum, metus sapien bibendum leo, ut pharetra felis justo eu augue. Aliquam ultricies tincidunt nibh, mattis ultrices nulla eleifend vel. In euismod, ipsum id euismod bibendum, nulla ligula gravida arcu, vel elementum felis lacus eget nisi. Phasellus mauris sapien, malesuada in venenatis non, vulputate id diam. Nam leo purus, rutrum in viverra ut, fermentum at augue. Mauris rhoncus nisl nec sapien luctus, ut tempor nisl maximus. Donec finibus erat et nibh blandit sollicitudin. Nunc leo dui, luctus nec eros eu, pretium pellentesque ligula.',120),(6,1,3,'lkfjslkdjf',123),(7,1,9,'AAAAAAA',220);
+INSERT INTO `tb_oferta` VALUES (1,1,3,'Descripción De Albañilería',120),(2,1,2,'Descripción de gasfiteria',200),(4,1,9,'Descripción de multiservicios',150),(5,1,3,'Ut efficitur malesuada magna, in condimentum orci dictum dictum. Nam erat enim, ultrices ac tellus in, pharetra interdum enim. Sed mi tellus, facilisis et bibendum sit amet, fermentum quis ligula. Maecenas facilisis, tellus rhoncus luctus dictum, metus sapien bibendum leo, ut pharetra felis justo eu augue. Aliquam ultricies tincidunt nibh, mattis ultrices nulla eleifend vel. In euismod, ipsum id euismod bibendum, nulla ligula gravida arcu, vel elementum felis lacus eget nisi. Phasellus mauris sapien, malesuada in venenatis non, vulputate id diam. Nam leo purus, rutrum in viverra ut, fermentum at augue. Mauris rhoncus nisl nec sapien luctus, ut tempor nisl maximus. Donec finibus erat et nibh blandit sollicitudin. Nunc leo dui, luctus nec eros eu, pretium pellentesque ligula.',120),(6,1,3,'lkfjslkdjf',123),(7,1,9,'AAAAAAA',220),(8,11,1,'AAAAAA',111),(9,13,7,'Electricidad Test 2',200);
 /*!40000 ALTER TABLE `tb_oferta` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-01 19:23:41
+-- Dump completed on 2019-12-02 19:59:19

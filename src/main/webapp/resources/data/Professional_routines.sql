@@ -18,6 +18,41 @@
 --
 -- Dumping routines for database 'Professional'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `sp_actualizar_oferta` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_actualizar_oferta`(
+	var_id_usuario int,
+    var_id_oferta int,
+    var_id_especialidad int,
+    var_descripcion text,
+    var_precio_hora double
+)
+BEGIN
+	Update tb_oferta
+		set id_especialidad = ifnull(var_id_especialidad, id_especialidad),
+			descripcion = ifnull(var_descripcion, descripcion),
+            precio_hora = ifnull(var_precio_hora, precio_hora)
+    where id_usuario = var_id_usuario and id_oferta = var_id_oferta;
+
+	if row_count() = 1 then
+		Select 'success';
+    else
+		Select 'failed';
+	end if;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `sp_actualizar_usuario` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -43,7 +78,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_actualizar_usuario`(
     var_id_ubigeo int
 )
 BEGIN
-        
+	
 	Update tb_usuario
 		set nombre = ifnull(var_nombre, nombre),
 			apellidos = ifnull(var_apellidos, apellidos),
@@ -56,7 +91,7 @@ BEGIN
             presentacion = ifnull(var_presentacion, presentacion),
             rol = ifnull(var_rol, rol),
             id_ubigeo = ifnull(var_id_ubigeo, id_ubigeo)
-    where id_login = var_id_login;
+    where id_usuario = var_id_login;
 
 	if row_count() = 1 then
 		Select 'success';
@@ -419,11 +454,11 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registrar_reserva`(
 	var_id_reserva int,
@@ -436,8 +471,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registrar_reserva`(
     var_cantidad_horas int
 )
 BEGIN
-	Insert into tb_reserva (id_usuario, id_oferta, precio, direccion, fecha, hora, cantidad_horas)
-	values (var_id_usuario, var_id_oferta, var_precio, var_direccion, var_fecha, var_hora, var_cantidad_horas);
+	Insert into tb_reserva (id_usuario, id_oferta, precio, direccion, fecha, hora, cantidad_horas, atendido)
+	values (var_id_usuario, var_id_oferta, var_precio, var_direccion, var_fecha, var_hora, var_cantidad_horas, 'No');
     
     if row_count() > 0 then
 		Select concat(last_insert_id(), '');
@@ -496,4 +531,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-01 19:23:42
+-- Dump completed on 2019-12-02 19:59:19
