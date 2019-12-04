@@ -41,7 +41,7 @@ CREATE TABLE `tb_usuario` (
   PRIMARY KEY (`id_usuario`),
   KEY `fk_ubigeo_idx` (`id_ubigeo`),
   CONSTRAINT `fk_ubigeo` FOREIGN KEY (`id_ubigeo`) REFERENCES `tb_ubigeo` (`id_ubigeo`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,7 +50,7 @@ CREATE TABLE `tb_usuario` (
 
 LOCK TABLES `tb_usuario` WRITE;
 /*!40000 ALTER TABLE `tb_usuario` DISABLE KEYS */;
-INSERT INTO `tb_usuario` VALUES (0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,'proff'),(1,'110495257321975923163','Gabriel','Sánchez Villacorta','gabriel.sanchezv27@gmail.com',NULL,NULL,'https://lh4.googleusercontent.com/-KVr0_2FBhEg/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdPEUpKKJgA-jUfFlFRIsqIdJeIgw/s96-c/photo.jpg','',0,NULL,'facebook','2019-10-26 22:04:51',150117,'proff'),(2,'112221373659922313575','Gabriel','Sanchez','gabriel@plazapoints.com',NULL,NULL,'https://lh5.googleusercontent.com/-1vOxXmboqYE/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcUbtR0KDKXsnOe-DEiSyHw_XP3aQ/s96-c/photo.jpg',NULL,NULL,NULL,'facebook','2019-10-26 22:04:51',0,'client'),(4,'105824755067481443452','Gabriel','Sanchez V.','gslu2717@gmail.com',NULL,NULL,'https://lh3.googleusercontent.com/a-/AAuE7mBkWKKW69_FXKH_jelIuCkYXNKNGPJE0L2MQUs59g=s96-c',NULL,0,NULL,'facebook','2019-10-27 21:17:05',0,'proff'),(5,'114495295286473726977','Luis','z','luisz160897@gmail.com',NULL,NULL,'https://lh3.googleusercontent.com/a-/AAuE7mDTigSx3ZiEIMAN0O19jaeg1595cECIgQomBZVRGw=s96-c',NULL,0,NULL,'facebook','2019-11-27 19:48:04',0,'proff'),(10,NULL,'Belen','Roque Vasquez','belenroque27@gmail.com','123456',NULL,NULL,NULL,NULL,NULL,'normal','2019-11-28 23:56:48',0,NULL),(11,NULL,'Manuel','Carbajal','manuel.carbajal@gmail.com','123456',NULL,NULL,NULL,0,NULL,'normal','2019-11-30 21:59:21',0,'proff'),(12,NULL,'angelo','torreblanca villa','a@hotmail.com','123',NULL,NULL,NULL,0,NULL,'normal','2019-12-02 19:48:09',0,'proff'),(13,NULL,'AAA','BBB','asda@gmail.com','1234',NULL,NULL,NULL,0,NULL,'normal','2019-12-02 19:49:42',0,'proff');
+INSERT INTO `tb_usuario` VALUES (1,'110495257321975923163','Gabriel','Sánchez Villacorta','gabriel.sanchezv27@gmail.com',NULL,'1994-07-27','https://lh4.googleusercontent.com/-KVr0_2FBhEg/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdPEUpKKJgA-jUfFlFRIsqIdJeIgw/s96-c/photo.jpg','',0,NULL,'facebook','2019-10-26 22:04:51',150117,'proff'),(2,'112221373659922313575','Gabriel','Sanchez','gabriel@plazapoints.com',NULL,NULL,'https://lh5.googleusercontent.com/-1vOxXmboqYE/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcUbtR0KDKXsnOe-DEiSyHw_XP3aQ/s96-c/photo.jpg',NULL,NULL,NULL,'facebook','2019-10-26 22:04:51',0,'client'),(4,'105824755067481443452','Gabriel','Sanchez V.','gslu2717@gmail.com',NULL,NULL,'https://lh3.googleusercontent.com/a-/AAuE7mBkWKKW69_FXKH_jelIuCkYXNKNGPJE0L2MQUs59g=s96-c',NULL,0,NULL,'facebook','2019-10-27 21:17:05',0,'proff'),(5,'114495295286473726977','Luis','z','luisz160897@gmail.com',NULL,NULL,'https://lh3.googleusercontent.com/a-/AAuE7mDTigSx3ZiEIMAN0O19jaeg1595cECIgQomBZVRGw=s96-c',NULL,0,NULL,'facebook','2019-11-27 19:48:04',0,'proff'),(14,'105317260085999348489','Belen','Roque','belenroque27@gmail.com',NULL,NULL,'https://lh3.googleusercontent.com/a-/AAuE7mBxkE2K7X_0zw6iD-VEDqXSRMelsoZNEZTc5Yx9=s96-c','',0,NULL,'facebook','2019-12-03 21:31:14',150104,'proff'),(15,'110457753414177840093','Manuel','Carbajal','manuelcarbajal519@gmail.com',NULL,NULL,'https://lh3.googleusercontent.com/a-/AAuE7mAR9VG_zZO0kIRd7dNzJD90NMepf7z6fk3V5j1pxeo=s96-c',NULL,NULL,NULL,'facebook','2019-12-03 21:38:34',0,NULL);
 /*!40000 ALTER TABLE `tb_usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -63,4 +63,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-02 19:59:19
+-- Dump completed on 2019-12-03 22:33:07

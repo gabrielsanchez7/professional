@@ -33,7 +33,7 @@ CREATE TABLE `tb_reserva` (
   `cantidad_horas` int(11) DEFAULT NULL,
   `atendido` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_reserva`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `tb_reserva` (
 
 LOCK TABLES `tb_reserva` WRITE;
 /*!40000 ALTER TABLE `tb_reserva` DISABLE KEYS */;
-INSERT INTO `tb_reserva` VALUES (11,11,5,240,'Av. Angelica Gamarra','2019-12-10','11:00 am',2,'Si'),(12,11,5,360,'Av Primavera 123','2019-12-19','05:00 pm',3,'No'),(13,11,9,400,'Av asadas','2019-12-05','08:00 am',2,'No');
+INSERT INTO `tb_reserva` VALUES (14,1,11,690,'Av. Industrial 123','2020-01-26','12:00 pm',3,'Si'),(15,1,12,180,'Av Primavera 456','2019-12-24','11:00 am',2,'No');
 /*!40000 ALTER TABLE `tb_reserva` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-02 19:59:19
+-- Dump completed on 2019-12-03 22:33:06

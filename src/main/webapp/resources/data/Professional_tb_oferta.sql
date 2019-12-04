@@ -29,7 +29,7 @@ CREATE TABLE `tb_oferta` (
   `descripcion` text,
   `precio_hora` double DEFAULT NULL,
   PRIMARY KEY (`id_oferta`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `tb_oferta` (
 
 LOCK TABLES `tb_oferta` WRITE;
 /*!40000 ALTER TABLE `tb_oferta` DISABLE KEYS */;
-INSERT INTO `tb_oferta` VALUES (1,1,3,'Descripción De Albañilería',120),(2,1,2,'Descripción de gasfiteria',200),(4,1,9,'Descripción de multiservicios',150),(5,1,3,'Ut efficitur malesuada magna, in condimentum orci dictum dictum. Nam erat enim, ultrices ac tellus in, pharetra interdum enim. Sed mi tellus, facilisis et bibendum sit amet, fermentum quis ligula. Maecenas facilisis, tellus rhoncus luctus dictum, metus sapien bibendum leo, ut pharetra felis justo eu augue. Aliquam ultricies tincidunt nibh, mattis ultrices nulla eleifend vel. In euismod, ipsum id euismod bibendum, nulla ligula gravida arcu, vel elementum felis lacus eget nisi. Phasellus mauris sapien, malesuada in venenatis non, vulputate id diam. Nam leo purus, rutrum in viverra ut, fermentum at augue. Mauris rhoncus nisl nec sapien luctus, ut tempor nisl maximus. Donec finibus erat et nibh blandit sollicitudin. Nunc leo dui, luctus nec eros eu, pretium pellentesque ligula.',120),(6,1,3,'lkfjslkdjf',123),(7,1,9,'AAAAAAA',220),(8,11,1,'AAAAAA',111),(9,13,7,'Electricidad Test 2',200);
+INSERT INTO `tb_oferta` VALUES (10,1,9,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a turpis ornare, congue est in, blandit nisl. Ut risus arcu, lacinia sit amet turpis finibus, egestas mollis risus. Nulla cursus iaculis mattis. Sed accumsan, enim id laoreet placerat, urna tellus posuere ligula, vel placerat tortor mi quis tortor. Ut scelerisque et leo nec iaculis. In rutrum, velit luctus egestas finibus, ex mi tincidunt sapien, vel maximus dui urna et velit. Proin non semper sem. In pharetra magna et ipsum ornare, a fringilla elit convallis. Nulla dapibus consequat finibus. Ut blandit ultrices risus, malesuada semper ligula. Pellentesque placerat nunc nulla, ac dapibus neque sagittis eget. Cras molestie ullamcorper elit placerat vehicula.',120),(11,14,8,'Phasellus sit amet auctor velit. Proin quis sapien tortor. Maecenas porta, velit at semper dictum, magna elit rhoncus purus, nec lobortis ante lorem ac lacus. Suspendisse sit amet tincidunt ante. In at pellentesque nibh. Nulla facilisi. Suspendisse potenti. Morbi diam arcu, dapibus sit amet condimentum ut, condimentum a libero. Aenean ornare ex id lectus mattis, vitae venenatis elit elementum. In pellentesque pharetra urna quis maximus. Pellentesque et rhoncus nisi. Duis feugiat, enim id consectetur malesuada, nisl lorem congue est, nec vehicula metus mauris vitae massa. Suspendisse potenti. Cras ac nulla sapien. In rutrum dapibus lacus at posuere. In hendrerit pellentesque ipsum, vitae consequat enim eleifend eget.',230),(12,14,4,'Nullam eget pharetra dui. Etiam feugiat, arcu ac posuere condimentum, tellus diam consequat enim, eu facilisis dui ipsum in enim. Nam posuere rutrum magna ac egestas. Nullam sodales odio vel tincidunt sollicitudin. Nam mollis mi quis tristique cursus. Nunc ultricies finibus sapien, id interdum elit eleifend dignissim. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc tincidunt magna quis porttitor tincidunt. Suspendisse ac convallis sem. Praesent at accumsan sem.',90);
 /*!40000 ALTER TABLE `tb_oferta` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-02 19:59:19
+-- Dump completed on 2019-12-03 22:33:06

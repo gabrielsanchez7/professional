@@ -91,7 +91,7 @@ BEGIN
             presentacion = ifnull(var_presentacion, presentacion),
             rol = ifnull(var_rol, rol),
             id_ubigeo = ifnull(var_id_ubigeo, id_ubigeo)
-    where id_usuario = var_id_login;
+    where id_login = var_id_login;
 
 	if row_count() = 1 then
 		Select 'success';
@@ -312,8 +312,8 @@ BEGIN
 		Select
 			re.id_reserva,
 			us.id_usuario,
-			us2.nombre,
-			us2.apellidos,
+			us.nombre,
+			us.apellidos,
 			ofe.id_oferta,
 			re.precio,
 			re.direccion,
@@ -323,9 +323,8 @@ BEGIN
             re.atendido
 		from tb_reserva re
         inner join tb_oferta ofe on re.id_oferta = ofe.id_oferta
-		inner join tb_usuario us on re.id_usuario
-        inner join tb_usuario us2 on re.id_usuario = us2.id_usuario
-		where ofe.id_usuario = us.id_usuario and re.atendido = 'No' ;
+		inner join tb_usuario us on re.id_usuario = us.id_usuario
+		where ofe.id_usuario = var_id_usuario;
 	end if;
 
 	
@@ -531,4 +530,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-02 19:59:19
+-- Dump completed on 2019-12-03 22:33:07
