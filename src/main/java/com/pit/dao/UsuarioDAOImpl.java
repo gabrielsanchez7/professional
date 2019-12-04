@@ -64,7 +64,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		
 		try {
 			StoredProcedureQuery proc = entityManager.createStoredProcedureQuery("sp_actualizar_usuario");
-			proc.registerStoredProcedureParameter("var_id_login", int.class, ParameterMode.IN);
+			proc.registerStoredProcedureParameter("var_id_login", String.class, ParameterMode.IN);
 			proc.registerStoredProcedureParameter("var_nombre", String.class, ParameterMode.IN);
 			proc.registerStoredProcedureParameter("var_apellidos", String.class, ParameterMode.IN);
 			proc.registerStoredProcedureParameter("var_email", String.class, ParameterMode.IN);
@@ -77,7 +77,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			proc.registerStoredProcedureParameter("var_rol", String.class, ParameterMode.IN);
 			proc.registerStoredProcedureParameter("var_id_ubigeo", int.class, ParameterMode.IN);
 			
-			proc.setParameter("var_id_login", usuario.getIdUsuario());
+			proc.setParameter("var_id_login", usuario.getIdLogin());
 			proc.setParameter("var_nombre", usuario.getNombre());
 			proc.setParameter("var_apellidos", usuario.getApellidos());
 			proc.setParameter("var_email", usuario.getEmail());

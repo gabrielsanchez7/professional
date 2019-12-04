@@ -100,7 +100,7 @@ $(document).ready(function(){
 					'<span class="label">Precio por hora</span>' +
 					'<p class="precio">S/ ' + data.precioHora + '</p>' +
 				'</div>' +
-				'<button class="btn btn-on">Ver detalle</button>' +
+				'<a href="${pageContext.request.contextPath}/oferta/' + data.idOferta + '" class="btn btn-on">Ver detalle</a>' +
 			'</div>' +
 		'</article>';
 		$('.lista-ofertas').append(html);

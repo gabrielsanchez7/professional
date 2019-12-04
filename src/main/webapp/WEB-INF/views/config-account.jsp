@@ -212,7 +212,12 @@
 						<div class="options">
 							<p class="id"><span class="label">C&oacute;digo:</span> ${contrato.idReserva}</p>
 							<div class="buttons">
-								<button class="atender-oferta" type="button" data-id="${contrato.idReserva}">Atender</button>
+								<c:if test="${contrato.atendido eq 'No'}">
+									<button class="atender-oferta" type="button" data-id="${contrato.idReserva}">Atender</button>
+								</c:if>
+								<c:if test="${contrato.atendido eq 'Si'}">
+									<span>Atendido</span>
+								</c:if>
 							</div>
 						</div>
 						<p class="descripcion"><span class="label">Direcci&oacute;:</span>${contrato.direccion}</p>

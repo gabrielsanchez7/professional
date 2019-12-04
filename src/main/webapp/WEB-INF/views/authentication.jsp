@@ -20,7 +20,7 @@
 		
 <!-- 	</div> -->
 	
- 	<!-- <div id="logreg">
+ 	<div id="logreg">
 		<h2>Ingresar</h2>
 		<a class="social" id="facebook" href="#"><i class="fab fa-facebook-f"></i><span>Ingresar</span> con Facebook</a>
 
@@ -29,49 +29,49 @@
 				<span class="icon fab fa-google"></span><span class="buttonText"><span class="change">Ingresar</span> con Google</span>
 			</div>
 		</div>
-	</div> -->
-	
-	<div class="register form">
-		<p class="link">&iquest;Ya tienes una cuenta? <a href="javascript:void(0)" class="linkup" data-link="login">Ingresa desde aqu&iacute;</a></p>
-		<label>
-			<input type="text" id="name" autocomplete="off" data-validate="false" data-message="Ingrese un nombre v&aacute;lido" data-type="name"/>
-			<span class="placeholder">Nombre</span>
-			<i class="fas fa-user"></i>
-		</label>
-		<label>
-			<input type="text" id="surname" autocomplete="off" data-validate="false" data-message="Ingrese apellidos v&aacute;lidos" data-type="name"/>
-			<span class="placeholder">Apellidos</span>
-			<i class="far fa-user"></i>
-		</label>
-		<label>
-			<input type="text" id="email" autocomplete="off" data-validate="false" data-message="Ingrese un correo electr&oacute;nico v&aacute;lido" data-type="email"/>
-			<span class="placeholder">Correo electr&oacute;nico</span>
-			<i class="fas fa-at"></i>
-		</label>
-		<label>
-			<input type="password" id="password" autocomplete="off" data-validate="false" data-message="Ingrese una contrase&ntilde;a v&aacute;lida" data-type="password"/>
-			<span class="placeholder">Contrase&ntilde;a</span>
-			<i class="fas fa-key"></i>
-		</label>
-		
-		<button id="registroForm" type="submit">Registrar</button>
 	</div>
 	
-	<div class="login form">
-		<p class="link">&iquest;A&uacute; no tienes una cuenta? <a href="javascript:void(0)" class="linkup" data-link="register">Reg&iacute;strate desde aqu&iacute;</a></p>
-		<label>
-			<input type="text" id="logEmail" autocomplete="off" data-validate="false" data-message="Ingrese un correo electr&oacute;nico v&aacute;lido" data-type="email"/>
-			<span class="placeholder">Correo electr&oacute;nico</span>
-			<i class="fas fa-at"></i>
-		</label>
-		<label>
-			<input type="password" id="logPassword" autocomplete="off" data-validate="false" data-message="Ingrese una contrase&ntilde;a v&aacute;lida" data-type="password"/>
-			<span class="placeholder">Contrase&ntilde;a</span>
-			<i class="fas fa-key"></i>
-		</label>
+<!-- 	<div class="register form"> -->
+<!-- 		<p class="link">&iquest;Ya tienes una cuenta? <a href="javascript:void(0)" class="linkup" data-link="login">Ingresa desde aqu&iacute;</a></p> -->
+<!-- 		<label> -->
+<!-- 			<input type="text" id="name" autocomplete="off" data-validate="false" data-message="Ingrese un nombre v&aacute;lido" data-type="name"/> -->
+<!-- 			<span class="placeholder">Nombre</span> -->
+<!-- 			<i class="fas fa-user"></i> -->
+<!-- 		</label> -->
+<!-- 		<label> -->
+<!-- 			<input type="text" id="surname" autocomplete="off" data-validate="false" data-message="Ingrese apellidos v&aacute;lidos" data-type="name"/> -->
+<!-- 			<span class="placeholder">Apellidos</span> -->
+<!-- 			<i class="far fa-user"></i> -->
+<!-- 		</label> -->
+<!-- 		<label> -->
+<!-- 			<input type="text" id="email" autocomplete="off" data-validate="false" data-message="Ingrese un correo electr&oacute;nico v&aacute;lido" data-type="email"/> -->
+<!-- 			<span class="placeholder">Correo electr&oacute;nico</span> -->
+<!-- 			<i class="fas fa-at"></i> -->
+<!-- 		</label> -->
+<!-- 		<label> -->
+<!-- 			<input type="password" id="password" autocomplete="off" data-validate="false" data-message="Ingrese una contrase&ntilde;a v&aacute;lida" data-type="password"/> -->
+<!-- 			<span class="placeholder">Contrase&ntilde;a</span> -->
+<!-- 			<i class="fas fa-key"></i> -->
+<!-- 		</label> -->
 		
-		<button id="loginForm" type="submit">Ingresar</button>
-	</div>
+<!-- 		<button id="registroForm" type="submit">Registrar</button> -->
+<!-- 	</div> -->
+	
+<!-- 	<div class="login form"> -->
+<!-- 		<p class="link">&iquest;A&uacute; no tienes una cuenta? <a href="javascript:void(0)" class="linkup" data-link="register">Reg&iacute;strate desde aqu&iacute;</a></p> -->
+<!-- 		<label> -->
+<!-- 			<input type="text" id="logEmail" autocomplete="off" data-validate="false" data-message="Ingrese un correo electr&oacute;nico v&aacute;lido" data-type="email"/> -->
+<!-- 			<span class="placeholder">Correo electr&oacute;nico</span> -->
+<!-- 			<i class="fas fa-at"></i> -->
+<!-- 		</label> -->
+<!-- 		<label> -->
+<!-- 			<input type="password" id="logPassword" autocomplete="off" data-validate="false" data-message="Ingrese una contrase&ntilde;a v&aacute;lida" data-type="password"/> -->
+<!-- 			<span class="placeholder">Contrase&ntilde;a</span> -->
+<!-- 			<i class="fas fa-key"></i> -->
+<!-- 		</label> -->
+		
+<!-- 		<button id="loginForm" type="submit">Ingresar</button> -->
+<!-- 	</div> -->
 </div>
 
 <script type="text/javascript">

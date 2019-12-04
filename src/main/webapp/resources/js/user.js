@@ -267,7 +267,7 @@ ConfigUser.prototype.updateUser = function(){
 	
 	$('#actualizar-rol').click(function(){
 		var obj = {};
-		obj.idUsuario = logued.idUsuario;
+		obj.idLogin = logued.idLogin;
 		obj.rol = "proff";
 		
 		updateRequest(obj);
